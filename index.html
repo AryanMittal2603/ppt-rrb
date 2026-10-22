@@ -301,6 +301,14 @@ canvas.field{position:absolute;inset:0;width:100%;height:100%;display:block;z-in
 .cx b{display:block;font-weight:800;font-size:1.12cqw}
 .cx span{display:block;margin-top:.2cqw;font-size:.86cqw;line-height:1.3;color:var(--quiet)}
 .cxm{position:absolute;left:50cqw;top:29.6cqw;translate:-50% 0;z-index:6;background:var(--ink);color:#fff;border-radius:1cqw;padding:.7cqw 1.1cqw;text-align:center;font-weight:700;font-size:.92cqw;line-height:1.3;box-shadow:0 0 0 .4cqw #2E756722}
+
+/* service tiles */
+.tile{position:absolute;height:13.4cqw;background:#FFFFFFC8;border:1px solid #14284416;border-radius:.8cqw;padding:1.1cqw 1.1cqw;z-index:5;box-shadow:0 .5cqw 1.4cqw #1428440c}
+.tile .ti{display:grid;place-items:center;width:2.8cqw;height:2.8cqw;border-radius:.7cqw}
+.tile .ti svg{width:1.6cqw;height:1.6cqw}
+.tile .tl2{position:absolute;right:.9cqw;top:1.05cqw;background:#2E75671A;color:#2E7567;border-radius:1cqw;padding:.15cqw .55cqw;font:700 .72cqw Archivo,Arial,sans-serif}
+.tile b{display:block;margin-top:1cqw;font-weight:800;font-size:1.15cqw;line-height:1.18}
+.tile .td{display:block;margin-top:.4cqw;font-size:.98cqw;line-height:1.32;color:var(--quiet)}
 /* team */
 .sweepline{will-change:left}
 .play .sweepline{animation:sweepx 3.4s cubic-bezier(.45,0,.55,1) .9s both}
@@ -729,32 +737,45 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
 
 /* 14 ─ proven at scale */
 {
-  const R = [
-    ['Online application system','Entire AMS: registration, forms, fees, scrutiny'],
-    ['Candidate support and helpdesk','Helpdesk, chatbot and call centre'],
-    ['Grievance tracking','AI-based grievance handling'],
-    ['Document verification','Digital DV with identity checks'],
-    ['Results','Result processing and certificates'],
-    ['Exam-side data with the ECA','Centre allocation, admit cards, city slips, QP randomisation'],
+  const I = {
+    id:'<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2.4"/><path d="M5.5 16.5c.8-1.8 2.2-2.6 3.5-2.6s2.7.8 3.5 2.6M14 10h4M14 13h4"/>',
+    form:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+    doc:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/><path d="M9 14l2 2 4-4"/>',
+    pin:'<path d="M12 21s-6-5.5-6-10a6 6 0 0 1 12 0c0 4.5-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/>',
+    card:'<rect x="3" y="6" width="18" height="12" rx="2"/><path d="M7 10h6M7 14h4"/><circle cx="17" cy="12" r="1.8"/>',
+    shuffle:'<path d="M3 7h4c4 0 6 10 10 10h4M3 17h4c1.5 0 2.7-1.4 3.7-3M14 9.5C15 8 16 7 17 7h4"/><path d="M18 4l3 3-3 3M18 14l3 3-3 3"/>',
+    agent:'<rect x="5" y="7" width="14" height="10" rx="3"/><path d="M12 4v3M9 12h.01M15 12h.01M9.5 15h5"/><path d="M3 11v2M21 11v2"/>',
+    ticket:'<path d="M4 7h16v3a2 2 0 0 0 0 4v3H4v-3a2 2 0 0 0 0-4z"/><path d="M14 7v10" stroke-dasharray="2 2"/>'};
+  const T = [
+    ['id','One-time registration','Aadhaar, face recognition, DigiLocker','#2E7567'],
+    ['form','Application management','Dynamic forms, multiple payment gateways','#C9962B'],
+    ['doc','AI document verification','AI scrutiny of every upload','#2557DA'],
+    ['pin','Centre allocation','Allocation and randomisation','#B76A3B'],
+    ['card','Admit cards and city slips','Issued to every candidate','#2E7567'],
+    ['shuffle','Question paper randomisation','Unique, secure sets per shift','#C9962B'],
+    ['agent','Grievance handling','AI agents first, human escalation, over mail, SMS and calls','#2557DA'],
+    ['ticket','Ticketing system','Every issue tracked to closure','#B76A3B'],
   ];
-  let h='', svg='';
-  h += `<div class="a" style="position:absolute;left:37cqw;top:15.6cqw;width:56cqw;display:flex;font:600 .8cqw 'IBM Plex Mono',Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#637383;z-index:5;--d:.5s"><span style="width:17.5cqw">RRB needs</span><span style="width:27cqw;padding-left:2.4cqw">Already delivered at UPESSC</span><span>Status</span></div>`;
-  R.forEach((r,i)=>{ const y=18.4+i*4.75, d=.9+i*.35, extra=i===5;
-    h += `<div class="a l" style="position:absolute;left:37cqw;top:${y}cqw;width:17cqw;font-weight:800;font-size:1.22cqw;line-height:1.2;z-index:5;--d:${d}s">${r[0]}</div>`;
-    svg += `<path class="dr" pathLength="1" d="M${54.4*16} ${(y+.75)*16}H${57.6*16}" stroke="#2E7567" stroke-width="2" style="--d:${d+.25}s;--t:.3s"/><circle class="a pop" cx="${57.9*16}" cy="${(y+.75)*16}" r="5" fill="#2E7567" style="--d:${d+.5}s;transform-box:fill-box;transform-origin:center"/>`;
-    h += `<div class="a" style="position:absolute;left:58.9cqw;top:${y}cqw;width:23cqw;font-size:1.12cqw;line-height:1.3;z-index:5;--d:${d+.45}s">${r[1]}</div>`;
-    h += `<div class="a pop" style="position:absolute;left:83.4cqw;top:${y-.1}cqw;z-index:5;--d:${d+.7}s"><span style="display:inline-block;background:${extra?'#2557DA':'#2E7567'};color:#fff;font:700 .85cqw Archivo,Arial,sans-serif;border-radius:1cqw;padding:.3cqw .8cqw">${extra?'Live · bonus':'Live'}</span></div>`;
-    if(i<5) h += `<div style="position:absolute;left:37cqw;top:${y+3.6}cqw;width:55.8cqw;height:1px;background:#14284412;z-index:4"></div>`;
-  });
+  const w=13.45, gap=.75; let h='';
+  T.forEach((t,i)=>{ const c=i%4, r=Math.floor(i/4), x=35.6+c*(w+gap), y=15.6+r*14.4, d=1+i*.14;
+    h += `<div class="tile a pop" style="left:${x}cqw;top:${y}cqw;width:${w}cqw;--d:${d.toFixed(2)}s">
+      <span class="ti" style="background:${t[3]}"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${I[t[0]]}</svg></span>
+      <span class="tl2">✓ Live</span>
+      <b>${t[1]}</b><span class="td">${t[2]}</span></div>`; });
   S.push(`<section class="slide" id="s14" aria-label="Proven at scale">
-    <div class="kicker a" ${D(.1)}>Proven at scale · UPESSC</div>
-    ${rise('What RRB needs, <em>we already run</em>', .2, 'h1', 'h1')}
-    <div class="stat" style="left:7.2cqw;top:16cqw;width:26cqw"><div class="n a c-green" style="font-size:6.6cqw;--d:.4s"><span data-n="34" data-delay=".4" data-dur="2">34</span><small style="font-size:.42em">lakh</small></div>
-      <div class="d a" style="--d:.7s;font-size:1.3cqw;color:#142844;font-weight:700;margin-top:.8cqw">candidates served end to end</div></div>
-    <div class="stat" style="left:7.2cqw;top:29.6cqw;width:26cqw"><div class="n a" style="font-size:4.2cqw;--d:1s"><span data-n="5" data-delay="1">5</span><small style="font-size:.45em">of 5</small></div>
-      <div class="d a" style="--d:1.2s;font-size:1.15cqw">core RRB service areas already live, plus exam-side operations RRB does not even ask for</div></div>
-    <svg class="over" viewBox="0 0 1600 900">${svg}</svg>${h}
-    <div class="outcome a" style="top:48.4cqw;font-size:1.3cqw;--d:3.6s">Same team, same platform: <em>RRB starts from a system already proven at state scale.</em></div>
+    <div class="kicker a" ${D(.1)}>Proven at scale · this year</div>
+    ${rise('Every service RRB needs, <em>we already run</em>', .2, 'h1', 'h1')}
+    <div class="stat" style="left:7.2cqw;top:15.6cqw;width:26cqw"><div class="n a c-green" style="font-size:6.4cqw;--d:.4s"><span data-n="34" data-delay=".4" data-dur="2">34</span><small style="font-size:.4em">lakh</small></div>
+      <div class="d a" style="--d:.7s;font-size:1.25cqw;color:#142844;font-weight:700;margin-top:.6cqw">candidates served this year</div></div>
+    <div class="stat" style="left:7.2cqw;top:27.4cqw;width:26cqw"><div class="n a" style="font-size:4cqw;--d:.9s"><span data-n="5" data-delay=".9">5</span><small style="font-size:.6em;margin-left:0">+</small></div>
+      <div class="d a" style="--d:1.1s;font-size:1.15cqw">examinations delivered end to end</div></div>
+    <div class="a" style="position:absolute;left:7.2cqw;top:37.6cqw;width:25.6cqw;z-index:5;--d:1.3s">
+      <div style="display:flex;justify-content:space-between;font:600 .78cqw 'IBM Plex Mono',Consolas,monospace;letter-spacing:.1em;text-transform:uppercase;color:#637383"><span>Today · 34 lakh</span><span style="color:#B76A3B">Year-end · 75+ lakh</span></div>
+      <div style="position:relative;height:.9cqw;border-radius:.5cqw;background:#14284414;margin-top:.5cqw;overflow:hidden"><div class="gx" style="position:absolute;inset:0;width:45%;border-radius:.5cqw;background:linear-gradient(90deg,#2E7567,#C9962B);--d:1.6s;--t:1.6s"></div></div>
+      <div style="margin-top:.6cqw;font-size:1.05cqw;line-height:1.35"><b>75+ lakh candidates</b> <span style="color:#637383">targeted by the end of this year</span></div>
+    </div>
+    ${h}
+    <div class="outcome a" style="top:46.6cqw;--d:2.6s">We have done it all, at scale. <em>With RailTel, RRB gets it on day one.</em></div>
   </section>`);
 }
 
