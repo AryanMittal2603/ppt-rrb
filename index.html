@@ -352,6 +352,59 @@ canvas.field{position:absolute;inset:0;width:100%;height:100%;display:block;z-in
 .aleg i{width:1.2cqw;height:.7cqw;border:1.2px solid;border-radius:.15cqw}
 .aleg i.ams{background:#FBF3E2;border-color:#C9962B}.aleg i.rms{background:#EAF0FC;border-color:#2557DA}.aleg i.db{background:#E8F2EF;border-color:#2E7567}.aleg i.kf{background:#F8ECE5;border-color:#B76A3B}.aleg i.tp{border-color:#637383;border-style:dashed}.aleg i.ws{border-color:#142844;border-style:dashed}
 
+/* ai chatbot */
+.qw{position:absolute;z-index:5;display:flex;flex-direction:column;overflow:hidden;background:#FFFFFF;border:1px solid #14284418;border-radius:.9cqw;box-shadow:0 .6cqw 1.6cqw #1428440f}
+.qh{display:flex;align-items:center;gap:.7cqw;padding:.75cqw 1cqw;background:#F7F9F8;border-bottom:1px solid #14284412}
+.qh b{display:block;font-weight:800;font-size:1.05cqw}
+.qh small{display:block;margin-top:.1cqw;font:600 .64cqw "IBM Plex Mono",Consolas,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet)}
+.qav{flex:none;width:2.2cqw;height:2.2cqw;border-radius:50%;background:var(--amber);display:grid;place-items:center}
+.qav svg{width:1.3cqw;height:1.3cqw}
+.qon{margin-left:auto;width:.6cqw;height:.6cqw;border-radius:50%;background:var(--green);box-shadow:0 0 0 .25cqw #2E756726}
+.qb{flex:1;display:flex;flex-direction:column;gap:.6cqw;padding:1cqw;background:linear-gradient(180deg,#F3F6F4,#EDF2F1)}
+.qm{max-width:86%;padding:.55cqw .8cqw;border-radius:.8cqw;font-size:.86cqw;line-height:1.32}
+.qm.me{align-self:flex-end;background:var(--ink);color:#fff;border-bottom-right-radius:.2cqw}
+.qbw{position:relative;align-self:flex-start;max-width:90%}
+.qm.bot{max-width:none;background:#fff;border:1px solid #14284414;border-bottom-left-radius:.2cqw}
+.qr{display:flex;justify-content:space-between;margin:.4cqw 0;padding:.35cqw .55cqw;border-radius:.4cqw;background:#2E75670F;border:1px solid #2E756733;font:600 .7cqw "IBM Plex Mono",Consolas,monospace;color:var(--quiet)}
+.qr b{color:var(--green)}
+.qt{position:absolute;left:0;top:0;display:flex;gap:.25cqw;padding:.65cqw .8cqw;border-radius:.8cqw;border-bottom-left-radius:.2cqw;background:#fff;border:1px solid #14284414;opacity:0}
+.qt i{width:.4cqw;height:.4cqw;border-radius:50%;background:var(--quiet);animation:qdot 1s ease-in-out infinite}
+.qt i:nth-child(2){animation-delay:.15s}.qt i:nth-child(3){animation-delay:.3s}
+@keyframes qdot{0%,100%{opacity:.3;transform:none}50%{opacity:1;transform:translateY(-.15cqw)}}
+.play .qt{animation:qtyp .8s linear var(--d) both}
+@keyframes qtyp{0%{opacity:0}15%{opacity:1}85%{opacity:1}100%{opacity:0}}
+.qch{display:flex;gap:.4cqw;margin-top:auto}
+.qch span{border:1px solid #C9962B88;background:#fff;color:#8A6A16;border-radius:2cqw;padding:.25cqw .7cqw;font-weight:700;font-size:.74cqw}
+.qz{position:absolute;z-index:3;border:1.5px dashed #C9962B;background:#C9962B0D;border-radius:.8cqw}
+.qz i{position:absolute;left:1cqw;top:.55cqw;font:600 .7cqw "IBM Plex Mono",Consolas,monospace;font-style:normal;letter-spacing:.12em;text-transform:uppercase;color:#9A7419;white-space:nowrap}
+.qi{display:flex;align-items:center;gap:.6cqw;padding:.55cqw .8cqw .55cqw 1cqw;background:#fff;border-top:1px solid #14284412;font-size:.8cqw;color:#8C99A6}
+.qi span{flex:1}
+.qi i{flex:none;width:1.7cqw;height:1.7cqw;border-radius:50%;background:var(--amber);display:grid;place-items:center}
+.qi svg{width:.9cqw;height:.9cqw}
+.qc{position:absolute;z-index:5;display:flex;flex-direction:column;background:var(--ink);color:#fff;border-radius:.8cqw;padding:1.2cqw 1.3cqw;box-shadow:0 0 0 .4cqw #C9962B26,0 1.2cqw 2.4cqw #14284426}
+.qss{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;padding-top:.4cqw}
+.qc .qch2{display:flex;align-items:center;gap:.8cqw;padding-bottom:.9cqw;border-bottom:1px solid #FFFFFF22}
+.qc .qch2 b{display:block;font-weight:800;font-size:1.5cqw;letter-spacing:-.02cqw}
+.qc .qch2 small{display:block;margin-top:.15cqw;font:600 .66cqw "IBM Plex Mono",Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#E3C27A}
+.qs{display:flex;gap:.8cqw}
+.qs em{font-style:normal;white-space:nowrap}
+.qs i{flex:none;width:1.7cqw;height:1.7cqw;border-radius:50%;border:1.5px solid var(--amber);color:var(--amber);display:grid;place-items:center;font-style:normal;font-weight:800;font-size:.85cqw}
+.qs b{display:block;font-weight:800;font-size:1.05cqw}
+.qs span span{display:block;margin-top:.15cqw;font-size:.86cqw;line-height:1.3;color:#B8D9E4;text-wrap:balance}
+.qd{position:absolute;z-index:5;display:flex;flex-direction:column;justify-content:center;padding:0 1cqw 0 1.7cqw;background:#FFFFFF;border:1px solid #14284416;border-radius:.55cqw;box-shadow:0 .2cqw .6cqw #1428440a}
+.qd:before{content:"";position:absolute;left:.7cqw;top:calc(50% - .22cqw);width:.44cqw;height:.44cqw;border-radius:50%;background:var(--amber)}
+.qd b{font-weight:800;font-size:.98cqw;line-height:1.15}
+.qd span{margin-top:.12cqw;font-size:.8cqw;color:var(--quiet)}
+.qp{position:absolute;z-index:6;border:2px solid var(--amber);border-radius:.55cqw;box-shadow:0 0 1.2cqw #C9962B66;opacity:0;pointer-events:none}
+.play .qp{animation:qping 1.6s ease var(--d) both}
+@keyframes qping{0%{opacity:0;scale:.98}25%{opacity:1;scale:1.02}100%{opacity:0;scale:1}}
+.done .qt,.done .qp{animation:none!important;opacity:0}
+.qg{position:absolute;top:46.8cqw;z-index:5;display:flex;gap:.8cqw;align-items:flex-start}
+.qg .gi{flex:none;width:2.1cqw;height:2.1cqw;border-radius:50%;display:grid;place-items:center}
+.qg svg{width:1.2cqw;height:1.2cqw}
+.qg b{display:block;font-weight:800;font-size:1.02cqw;line-height:1.2}
+.qg small{display:block;margin-top:.2cqw;font-size:.84cqw;line-height:1.3;color:var(--quiet)}
+
 /* slide menu */
 .menubtn{position:absolute;left:1.5cqw;top:1.7cqw;z-index:32;width:2.8cqw;height:2.8cqw;border-radius:.6cqw;border:1px solid #14284422;background:#FFFFFFD0;color:var(--ink);
   display:grid;place-items:center;cursor:pointer;box-shadow:0 .2cqw .6cqw #1428440f;transition:background .2s,transform .2s}
@@ -428,7 +481,7 @@ const D = (s) => `style="--d:${s}s"`;
 const rise = (txt, d, tag='span', cls='') => `<${tag} class="rise ${cls}" style="--d:${d}s">${txt}</${tag}>`;
 const chk = (d, col='#2E7567') => `<svg viewBox="0 0 24 24"><circle class="dr" pathLength="1" cx="12" cy="12" r="10.5" fill="none" stroke="${col}" stroke-width="1.8" style="--d:${d}s;--t:.6s"/><path class="dr" pathLength="1" d="M7 12.4l3.3 3.3L17.2 8.6" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="--d:${d+.35}s;--t:.4s"/></svg>`;
 
-const CHAPTERS = {1:'Opening',2:'The scope',4:'The candidate journey',6:'Integrations and dependencies',8:'The 30-day roadmap',9:'Technology and infrastructure',13:'Support and delivery',15:'Proven at scale',17:'Closing'};
+const CHAPTERS = {1:'Opening',2:'The scope',4:'The candidate journey',7:'Integrations and dependencies',9:'The 30-day roadmap',10:'Technology and infrastructure',14:'Support and delivery',16:'Proven at scale',18:'Closing'};
 const S = [];
 
 /* 1 ─ cover */
@@ -586,6 +639,75 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
     ${h}
     <div class="a" style="position:absolute;left:7.2cqw;top:39.8cqw;font:600 .82cqw 'IBM Plex Mono',Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#B76A3B;z-index:5;--d:1.9s">How data flows</div>
     <svg class="over" viewBox="0 0 1600 900">${svg}</svg>
+  </section>`);
+}
+
+/* 6 ─ AI chatbot inside AMS */
+{
+  const ic = {
+    bot:'<rect x="5" y="7" width="14" height="10" rx="3"/><path d="M12 4v3M9 12h.01M15 12h.01M9.5 15h5"/><path d="M3 11v2M21 11v2"/>',
+    lock:'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+    chat:'<path d="M4 5h11v8H8l-4 3z"/><path d="M15 9h5v8l-3-2h-6v-2"/>',
+    lang:'<path d="M4 6h9M8.5 4v2M6 6c.5 3 2.5 5.5 5 7M11 6c-.5 3-3 6-6 8"/><path d="M13 20l4-9 4 9M14.5 17h5"/>',
+    log:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>'};
+  const svgI = (k, sw=1.8) => `<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${ic[k]}</svg>`;
+  const STP = [
+    ['Understands','Reads the question, language and intent'],
+    ['Looks up','Fetches the candidate’s live record, <em>read-only</em>'],
+    ['Answers or acts','Within the same AMS rules a person follows'],
+    ['Hands off','To a helpdesk agent or the RRB, with a full summary'],
+  ];
+  const MOD = [
+    ['Registration and login','Profile, OTP, password reset'],
+    ['Application and documents','Form status, upload checks, edit window'],
+    ['Fee payment and refunds','Live payment status and receipts'],
+    ['Admit card and results','Links, dates and exam city'],
+    ['Grievances and tickets','Raise, track and close'],
+    ['CEN notices and FAQs','Eligibility, dates, how to apply'],
+  ];
+  const G = [
+    ['lock','#2557DA','Only the candidate’s own record','Signed in with OTP; Aadhaar stays masked'],
+    ['chat','#C9962B','Portal, mobile and WhatsApp','One assistant, the same answers everywhere'],
+    ['lang','#2E7567','In the candidate’s language','Hindi, English or a regional language'],
+    ['log','#B76A3B','Every conversation logged','Audit trail; FAQs improve from real questions'],
+  ];
+  const cx=36.4, cw=21.4, mx=66.6, mw=24.6, top=17.2, rh=3.6, rg=.88, my = i => top + i*(rh+rg);
+  let h='', svg='';
+  // chat window, a sample conversation
+  h += `<div class="qw a" style="left:7.2cqw;top:14.8cqw;width:25.6cqw;height:30cqw;--d:.4s">
+    <div class="qh"><span class="qav">${svgI('bot')}</span><span><b>RRB help</b><small>AI assistant · in the AMS portal</small></span><i class="qon"></i></div>
+    <div class="qb">
+      <div class="qm me a" style="--d:1.4s">Paid the fee by UPI, but my status still shows pending</div>
+      <div class="qbw"><span class="qt" style="--d:1.8s"><i></i><i></i><i></i></span><div class="qm bot a" style="--d:2.6s">Found it. The bank confirmed your ₹500 UPI payment at 14:32.<span class="qr">CEN 03/2026 · Fee<b>Paid ✓</b></span>Status updated; receipt sent to your email.</div></div>
+      <div class="qm me a" style="--d:3.5s">Admit card kab tak aayega?</div>
+      <div class="qbw"><span class="qt" style="--d:3.9s"><i></i><i></i><i></i></span><div class="qm bot a" style="--d:4.7s">एडमिट कार्ड का लिंक परीक्षा से पहले खुलेगा। लिंक खुलते ही आपको SMS भेज देंगे।</div></div>
+      <div class="qch a" style="--d:5.2s"><span>Talk to a person</span><span>Raise a grievance</span></div>
+    </div>
+    <div class="qi"><span>Type in any language…</span><i><svg viewBox="0 0 24 24" fill="#fff"><path d="M3 11.5L21 4l-7.5 18-2.5-8z"/></svg></i></div></div>`;
+  // the AMS boundary, the chatbot core and the modules it reads from
+  h += `<div class="qz a" style="left:34.8cqw;top:14.8cqw;width:58cqw;height:30cqw;--d:.6s"><i>AMS · Application Management System</i></div>`;
+  h += `<div class="a" style="position:absolute;left:${mx}cqw;top:15.35cqw;z-index:5;font:600 .7cqw 'IBM Plex Mono',Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#637383;--d:1.1s">Answers from live AMS data</div>`;
+  h += `<div class="qc a" style="left:${cx}cqw;top:${top}cqw;width:${cw}cqw;height:26cqw;--d:.8s">
+    <div class="qch2"><span class="qav" style="width:2.6cqw;height:2.6cqw">${svgI('bot')}</span><span><b>AI chatbot</b><small>AMS component · candidate-facing</small></span></div>
+    <div class="qss">${STP.map((s,k)=>`<div class="qs a" style="--d:${(1+k*.15).toFixed(2)}s"><i>${k+1}</i><span><b>${s[0]}</b><span>${s[1]}</span></span></div>`).join('')}</div></div>`;
+  MOD.forEach((m,i)=>{ const y=my(i), d=1.2+i*.1;
+    h += `<div class="qd a l" style="left:${mx}cqw;top:${y}cqw;width:${mw}cqw;height:${rh}cqw;--d:${d.toFixed(2)}s"><b>${m[0]}</b><span>${m[1]}</span></div>`;
+    const x0=(cx+cw)*16, x1=mx*16, y0=(23.2+i*2.8)*16, y1=(y+rh/2)*16, dl=(1.3+i*.07).toFixed(2);
+    svg += `<path id="qm${i}" class="dr" pathLength="1" d="M${x0} ${y0}C${x0+70} ${y0},${x1-70} ${y1},${x1} ${y1}" fill="none" stroke="#C9962B" stroke-opacity=".6" stroke-width="1.6" style="--d:${dl}s;--t:.6s"/>`;
+    svg += `<circle r="4" fill="#C9962B" opacity="0"><animateMotion dur="${(2+i*.25).toFixed(2)}s" repeatCount="indefinite" keyPoints="${i%2?'1;0':'0;1'}" keyTimes="0;1" calcMode="linear" begin="indefinite" data-at="${(2.2+i*.15).toFixed(2)}"><mpath href="#qm${i}"/></animateMotion><set attributeName="opacity" to=".9" begin="indefinite" data-at="${(2.2+i*.15).toFixed(2)}"/></circle>`; });
+  // the modules light up as the chatbot reads them
+  [[2,1.9],[3,4]].forEach(([i,d])=>{ h += `<div class="qp" style="left:${mx}cqw;top:${my(i)}cqw;width:${mw}cqw;height:${rh}cqw;--d:${d}s"></div>`; });
+  // question in, answer out
+  svg = `<defs>${[['qaA','#C9962B'],['qaG','#2E7567']].map(([id,c])=>`<marker id="${id}" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="${c}"/></marker>`).join('')}</defs>` + svg;
+  svg += `<path id="qq" class="dr" pathLength="1" d="M${32.8*16+4} ${27.6*16}H${cx*16-4}" stroke="#C9962B" stroke-width="2.2" marker-end="url(#qaA)" style="--d:1s;--t:.4s"/>`;
+  svg += `<path id="qa" class="dr" pathLength="1" d="M${cx*16-4} ${32.4*16}H${32.8*16+4}" stroke="#2E7567" stroke-width="2.2" marker-end="url(#qaG)" style="--d:1.2s;--t:.4s"/>`;
+  [['qq','#C9962B',1.5],['qa','#2E7567',2.6]].forEach(([p,c,at])=>{ svg += `<circle r="4" fill="${c}" opacity="0"><animateMotion dur="1.6s" repeatCount="indefinite" begin="indefinite" data-at="${at}"><mpath href="#${p}"/></animateMotion><set attributeName="opacity" to="1" begin="indefinite" data-at="${at}"/></circle>`; });
+  G.forEach((g,i)=>{ h += `<div class="qg a" style="left:${7.2+i*21.8}cqw;width:20.2cqw;--d:${(2.2+i*.15).toFixed(2)}s"><span class="gi" style="background:${g[1]}">${svgI(g[0])}</span><span><b>${g[2]}</b><small>${g[3]}</small></span></div>`; });
+  S.push(`<section class="slide" id="s5ai" aria-label="AI chatbot in AMS">
+    <div class="kicker a" ${D(.1)}>Inside AMS · AI chatbot</div>
+    ${rise('An AI chatbot in AMS, <em>answering from live records</em>', .2, 'h1', 'h1')}
+    <svg class="over" viewBox="0 0 1600 900" style="z-index:4">${svg}</svg>
+    ${h}
   </section>`);
 }
 
