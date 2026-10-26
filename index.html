@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>RRB AM-RMS · Plan with RailTel</title>
+<title>RRB AM-RMS · Application and Recruitment Management</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -309,6 +309,19 @@ canvas.field{position:absolute;inset:0;width:100%;height:100%;display:block;z-in
 .tile .tl2{position:absolute;right:.9cqw;top:1.05cqw;background:#2E75671A;color:#2E7567;border-radius:1cqw;padding:.15cqw .55cqw;font:700 .72cqw Archivo,Arial,sans-serif}
 .tile b{display:block;margin-top:1cqw;font-weight:800;font-size:1.15cqw;line-height:1.18}
 .tile .td{display:block;margin-top:.4cqw;font-size:.98cqw;line-height:1.32;color:var(--quiet)}
+
+/* tech stack */
+.tsb{position:absolute;left:7.2cqw;width:62cqw;height:6.3cqw;display:flex;align-items:center;gap:1.4cqw;background:#FFFFFFC4;border:1px solid #14284416;border-left:.4cqw solid var(--c);border-radius:.6cqw;padding:0 1.3cqw;z-index:5}
+.tsn{flex:none;width:14.5cqw}
+.tsn b{display:block;font-weight:800;font-size:1.25cqw}
+.tsn small{display:block;margin-top:.2cqw;font-size:.86cqw;color:var(--quiet);line-height:1.25}
+.tsc{display:flex;flex-wrap:wrap;gap:.45cqw}
+.tsc span{border:1px solid #14284420;background:#fff;border-radius:.4cqw;padding:.3cqw .7cqw;font-weight:700;font-size:.95cqw;white-space:nowrap}
+.tsc i{font-style:normal;font:600 .74cqw "IBM Plex Mono",Consolas,monospace;color:var(--quiet)}
+.tsi{position:absolute;left:71.2cqw;width:21.6cqw;z-index:5;border-left:2px solid #14284422;padding-left:1cqw}
+.tsi b{display:block;font-weight:800;font-size:1.08cqw}
+.tsi span{display:block;margin-top:.2cqw;font-size:.92cqw;line-height:1.3}
+.tsi small{display:block;margin-top:.15cqw;font-size:.82cqw;color:var(--quiet)}
 /* team */
 .sweepline{will-change:left}
 .play .sweepline{animation:sweepx 3.4s cubic-bezier(.45,0,.55,1) .9s both}
@@ -356,7 +369,7 @@ const D = (s) => `style="--d:${s}s"`;
 const rise = (txt, d, tag='span', cls='') => `<${tag} class="rise ${cls}" style="--d:${d}s">${txt}</${tag}>`;
 const chk = (d, col='#2E7567') => `<svg viewBox="0 0 24 24"><circle class="dr" pathLength="1" cx="12" cy="12" r="10.5" fill="none" stroke="${col}" stroke-width="1.8" style="--d:${d}s;--t:.6s"/><path class="dr" pathLength="1" d="M7 12.4l3.3 3.3L17.2 8.6" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="--d:${d+.35}s;--t:.4s"/></svg>`;
 
-const CHAPTERS = {1:'Opening',2:'The tender',4:'The candidate journey',6:'Integrations and dependencies',8:'The 30-day roadmap',9:'Infrastructure',11:'Partnership',12:'Delivery',15:'Together'};
+const CHAPTERS = {1:'Opening',2:'The scope',4:'The candidate journey',6:'Integrations and dependencies',8:'The 30-day roadmap',9:'Technology and infrastructure',12:'Support and delivery',14:'Proven at scale',16:'Closing'};
 const S = [];
 
 /* 1 ─ cover */
@@ -365,8 +378,8 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
   <div class="kicker a" ${D(.2)}>Railway Recruitment Boards · AM-RMS</div>
   <h1 class="h1"><span class="rise" style="--d:.35s">From application</span><span class="rise" style="--d:.6s">to appointment,</span><span class="rise" style="--d:.85s"><em>on one track.</em></span></h1>
   <div class="promise"><div class="a" ${D(1.6)}>2.4 crore applications a year.</div><div class="a c-green" ${D(1.9)}>One platform, from first click to joining.</div></div>
-  <div class="objective a" ${D(2.4)}><b>Engagement plan</b> · the tender, the candidate journey, integrations, roadmap, infrastructure, support and team, for discussion with RailTel</div>
-  <div class="foot a" ${D(2.8)}><b>Innovatiview</b><span>×</span><b>RailTel</b><span>·</span><span>October 2026</span></div>
+  <div class="objective a" ${D(2.4)}><b>Proposal for RRB</b> · scope, candidate journey, platforms, integrations, roadmap, infrastructure, support and proof at scale</div>
+  <div class="foot a" ${D(2.8)}><b>Railway Recruitment Boards</b><span>·</span><span>October 2026</span></div>
 </section>`);
 
 /* 2 ─ about the tender */
@@ -386,7 +399,7 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
   h += `<div class="lab a" style="left:59cqw;top:16.4cqw;--d:1.4s">Where it must run<small>Hosting and compliance</small></div>`;
   comp.forEach((c,i) => { const d=1.7+i*.22; h += `<div class="li a l" style="left:59cqw;top:${21.4+i*3.55}cqw;--d:${d}s">${chk(d+.1)}${c}</div>`; });
   S.push(`<section class="slide" id="s2" aria-label="About the tender">
-    <div class="kicker a" ${D(.1)}>The tender</div>
+    <div class="kicker a" ${D(.1)}>The scope</div>
     ${rise('National scale, five-year run', .2, 'h1', 'h1')}
     ${h}
     <div class="outcome a" ${D(3.3)}>Exam conduct stays with the ECA. <em>Everything before and after it is ours.</em><small>Scope: application management, recruitment management and candidate support</small></div>
@@ -549,18 +562,20 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
 /* 7 ─ services and dependencies */
 {
   const C = [
-    ['Before T0','Application system',[['CEN rules and vacancy data','From RRB'],['Form fields and eligibility rules','From RRB'],['Payment gateway specs','From the nominated bank']]],
-    ['T0 + 2','Identity and messaging',[['Aadhaar and Face API access','Test credentials, callbacks'],['DigiLocker access','Document mapping'],['SMS, email, WhatsApp gateways','Approved templates']]],
-    ['T0 + 4','Before-the-exam modules',[['ECA data schema','Transfer mode agreed'],['Exam-report formats','CC, incident, attendance'],['Test-centre audit checklist','Evidence rules']]],
-    ['T0 + 8','Results and verification',[['ECA result files','Samples and key mapping'],['DV schedule and rules','Documents to verify']]],
-    ['T0 + 12','Medical, panel, joining',[['HMIS interface','Referral and results'],['HRMS interface','Panel and dossier hand-off'],['Panel and reservation rules','From RRB']]],
-    ['T0 + 20','Load test and go-live',[['Production hosting and DR','Ready for load testing'],['CERT-In empanelled auditor','Security audit'],['UAT users and sign-off','From RRB']]],
+    ['T − 29','Application system',[['CEN rules and vacancy data','From RRB'],['Form fields and eligibility rules','From RRB'],['Payment gateway specs','From the nominated bank']]],
+    ['T − 26','Identity and messaging',[['Aadhaar and Face API access','Test credentials, callbacks'],['DigiLocker access','Document mapping'],['SMS, email, WhatsApp gateways','Approved templates']]],
+    ['T − 24','Before-the-exam modules',[['ECA data schema','Transfer mode agreed'],['Exam-report formats','CC, incident, attendance'],['Test-centre audit checklist','Evidence rules']]],
+    ['T − 20','Results and verification',[['ECA result files','Samples and key mapping'],['DV schedule and rules','Documents to verify']]],
+    ['T − 16','Medical, panel, joining',[['HMIS interface','Referral and results'],['HRMS interface','Panel and dossier hand-off'],['Panel and reservation rules','From RRB']]],
+    ['T − 8','Load test and go-live',[['Production hosting and DR','Ready for load testing'],['CERT-In empanelled auditor','Security audit'],['UAT users and sign-off','From RRB']]],
   ];
   const gap=1.1, w=(85.6-5*gap)/6; let h='', svg='';
-  svg += `<path class="dr" pathLength="1" d="M${7.2*16} ${19.2*16}H${92.8*16}" stroke="#142844" stroke-width="2.4" style="--d:.6s;--t:1.4s"/>`;
+  svg += `<defs><marker id="ahg" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#2E7567"/></marker></defs><path class="dr" pathLength="1" d="M${7.2*16} ${19.2*16}H${92.8*16}" stroke="#142844" stroke-width="2.4" style="--d:.6s;--t:1.4s"/>`;
   const t0x = 7.2 + w + gap/2;
   svg += `<path class="dr" pathLength="1" d="M${t0x*16} ${15.2*16}V${41*16}" stroke="#2E7567" stroke-width="2" stroke-dasharray="1" style="--d:1.2s;--t:.6s"/>`;
-  h += `<div class="a" style="position:absolute;left:${t0x}cqw;top:41.4cqw;transform:translateX(-50%);text-align:center;z-index:5;--d:1.4s"><div style="font:600 .9cqw 'IBM Plex Mono',Consolas,monospace;color:#2E7567;letter-spacing:.08em">T0</div><div style="font-size:.9cqw;color:#2E7567;font-weight:700">Development starts</div></div>`;
+  h += `<div class="a" style="position:absolute;left:${t0x}cqw;top:41.4cqw;transform:translateX(-50%);text-align:center;z-index:5;--d:1.4s"><div style="font:600 .9cqw 'IBM Plex Mono',Consolas,monospace;color:#2E7567;letter-spacing:.08em">T − 28</div><div style="font-size:.9cqw;color:#2E7567;font-weight:700">Development starts</div></div>`;
+  svg += `<path class="dr" pathLength="1" d="M${92.8*16} ${19.2*16}H${94.6*16}" stroke="#2E7567" stroke-width="2.4" marker-end="url(#ahg)" style="--d:2s;--t:.3s"/>`;
+  h += `<div class="a" style="position:absolute;right:5.2cqw;top:15.9cqw;text-align:right;z-index:5;--d:2.3s"><div style="font-weight:800;font-size:1.65cqw;color:#2E7567">T</div><div style="font:600 .78cqw 'IBM Plex Mono',Consolas,monospace;letter-spacing:.1em;text-transform:uppercase;color:#2E7567">Go-live</div></div>`;
   C.forEach((c,i)=>{ const x=7.2+i*(w+gap), d=.8+i*.32;
     h += `<div class="a" style="position:absolute;left:${x}cqw;top:15.6cqw;width:${w}cqw;z-index:5;--d:${d}s"><div style="font-weight:800;font-size:1.65cqw;color:${i===5?'#2E7567':'#B76A3B'}">${c[0]}</div></div>`;
     h += `<div class="pin a pop" style="left:${x+.75}cqw;top:19.2cqw;--d:${d}s;${i===5?'background:#2E7567;box-shadow:0 0 0 .4cqw #2E756726':''}"></div>`;
@@ -568,10 +583,10 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
     c[2].forEach((it,k)=>{ h += `<div class="dep a" style="left:${x}cqw;top:${24.2+k*5.4}cqw;width:${w}cqw;--d:${(d+.2+k*.12).toFixed(2)}s"><b>${it[0]}</b><span>${it[1]}</span></div>`; });
   });
   S.push(`<section class="slide" id="s7" aria-label="Services and dependencies">
-    <div class="kicker a" ${D(.1)}>Services and dependencies</div>
-    ${rise('Each input arrives <em>just before it is needed</em>', .2, 'h1', 'h1')}
+    <div class="kicker a" ${D(.1)}>Services and dependencies · countdown to go-live</div>
+    ${rise('Counting down to T, <em>each input lands just in time</em>', .2, 'h1', 'h1')}
     <svg class="over" viewBox="0 0 1600 900">${svg}</svg>${h}
-    <div class="outcome a" style="top:45.6cqw;font-size:1.3cqw;font-weight:700;--d:3s">Build and testing start on a development environment; <em>production hosting is needed only from day 20.</em><small>All 43 inputs are tracked in one dependency register</small></div>
+    <div class="outcome a" style="top:45.6cqw;font-size:1.3cqw;font-weight:700;--d:3s">Build and testing start on a development environment; <em>production hosting is needed only from T − 8.</em><small>T is the go-live day · All 43 inputs are tracked in one dependency register</small></div>
   </section>`);
 }
 
@@ -609,6 +624,37 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
     ${rise('Live in <em>28 days</em> from the start of development', .2, 'h1', 'h1')}
     <svg class="over" viewBox="0 0 1600 900">${svg}</svg>${h}
     <div class="sweepline" style="position:absolute;top:16.8cqw;height:${rows.length*rh+.8}cqw;width:2px;background:#C9962B;box-shadow:0 0 1cqw #C9962B;z-index:6;left:${X(-5)}cqw;opacity:0"></div>
+  </section>`);
+}
+
+
+/* 9a ─ technology stack */
+{
+  const L = [
+    ['User interface','Candidate and admin portals','#C9962B',[['Nuxt','3.13'],['Vue','3.5'],['TypeScript',''],['Pinia',''],['Tailwind CSS','']]],
+    ['Application','Modular monolith, stateless instances','#2557DA',[['Go','1.26'],['Gin','1.10'],['nginx',''],['Scheduled jobs','in-process']]],
+    ['Data and storage','Shared state and documents','#2E7567',[['PostgreSQL','+ read replica'],['pgx',''],['Connection proxy',''],['Redis',''],['S3-compatible object storage','']]],
+    ['Platform and monitoring','Deploy, run and observe','#B76A3B',[['Docker',''],['Container orchestration',''],['Container registry',''],['Prometheus',''],['Grafana','']]],
+  ];
+  const top=17.4, bh=6.3, bg=.8; let h='';
+  L.forEach((l,i)=>{ const y=top+i*(bh+bg), d=(1.5-i*.25).toFixed(2);
+    h += `<div class="tsb a" style="top:${y}cqw;--d:${d}s;--c:${l[2]}">
+      <div class="tsn"><b>${l[0]}</b><small>${l[1]}</small></div>
+      <div class="tsc">${l[3].map(t=>`<span>${t[0]}${t[1]?` <i>${t[1]}</i>`:''}</span>`).join('')}</div></div>`; });
+  const G = [
+    ['Payments','ICICI EazyPay, BillDesk, Canara Bank, Indian Bank, PayU','Collection, verification, reconciliation'],
+    ['Identity and documents','DigiLocker; Aadhaar, PAN and driving-licence verification','Through an identity provider'],
+    ['Face liveness','FaceLive','Live-face check at each stage'],
+    ['Messaging','Transactional email and SMS','Notifications and OTP'],
+  ];
+  h += `<div class="a" style="position:absolute;left:71.2cqw;top:17.4cqw;width:21.6cqw;z-index:5;--d:1.9s"><div style="font:600 .8cqw 'IBM Plex Mono',Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#B76A3B">Integrations</div></div>`;
+  G.forEach((g,i)=>{ h += `<div class="tsi a l" style="top:${19.6+i*6.3}cqw;--d:${(2.1+i*.15).toFixed(2)}s"><b>${g[0]}</b><span>${g[1]}</span><small>${g[2]}</small></div>`; });
+  S.push(`<section class="slide" id="s9ts" aria-label="Technology stack">
+    <div class="kicker a" ${D(.1)}>Technology stack</div>
+    ${rise('A proven stack, <em>built for scale</em>', .2, 'h1', 'h1')}
+    <div class="a" style="position:absolute;left:7.2cqw;top:13.5cqw;width:85.6cqw;z-index:5;font-size:1.02cqw;color:#637383;--d:.5s">Candidate and admin portals on one platform, separated by routes and server-enforced permissions. Stateless instances behind a load balancer; a read replica for reporting.</div>
+    ${h}
+    <div class="outcome a" style="top:47.4cqw;font-size:1.3cqw;--d:3s">Open, portable components throughout: <em>no lock-in to a single cloud.</em></div>
   </section>`);
 }
 
@@ -673,26 +719,6 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
     <svg class="over" viewBox="0 0 1600 900">${svg}</svg>
     <div class="a" style="position:absolute;left:43cqw;top:50cqw;width:50cqw;font-size:1.05cqw;color:#637383;--d:2.6s">Live data levels off at 720 TB once the three-year window fills; backups keep growing to 1.2 PB.</div>
     <div class="a" style="position:absolute;left:7.2cqw;top:48.4cqw;width:30cqw;font-size:1.05cqw;line-height:1.4;color:#637383;--d:1.6s">Compute scales with traffic. Storage is added as candidate data builds up, not bought for year five on day one.</div>
-  </section>`);
-}
-
-/* 11 ─ better together */
-{
-  const rt=['A Railway PSU that Indian Railways already trusts','Part of the Railway family: knows Railway processes and ways of working','Nationwide network and secure data-centre expertise','At home with government security and compliance norms','One accountable, government-facing interface for RRB'];
-  const iv=['Almost all critical modules already developed and live','15+ years in the examinations domain: knows the candidate journey and where it is critical','Proven with 34 lakh candidates at UPESSC','AI-driven candidate support and grievance handling'];
-  const svg=`<path class="dr" pathLength="1" d="M560 400 C 720 400, 730 620, 800 690" fill="none" stroke="#C9962B" stroke-width="3" style="--d:1.6s;--t:1.2s"/>
-    <path class="dr" pathLength="1" d="M1040 400 C 880 400, 870 620, 800 690" fill="none" stroke="#2557DA" stroke-width="3" style="--d:1.8s;--t:1.2s"/>
-    <path class="dr" pathLength="1" d="M800 690V745" stroke="#2E7567" stroke-width="4" style="--d:2.9s;--t:.4s"/>`;
-  S.push(`<section class="slide" id="s11" aria-label="Better together">
-    <div class="kicker a" ${D(.1)}>Partnership</div>
-    ${rise('Why this works <em>better together</em>', .2, 'h1', 'h1')}
-    <svg class="over" viewBox="0 0 1600 900">${svg}</svg>
-    <div class="side" style="left:7.2cqw;width:26cqw;--c:#C9962B"><div class="who a" ${D(.6)}>RailTel</div><div class="sub a" ${D(.7)}>Railway trust and know-how</div>
-      <ul>${rt.map((t,k)=>`<li class="a l" style="--d:${.9+k*.14}s">${t}</li>`).join('')}</ul></div>
-    <div class="side" style="left:66.8cqw;width:26cqw;--c:#2557DA"><div class="who a" ${D(.8)}>Innovatiview</div><div class="sub a" ${D(.9)}>A platform already proven</div>
-      <ul>${iv.map((t,k)=>`<li class="a r" style="--d:${1.1+k*.14}s">${t}</li>`).join('')}</ul></div>
-    <div class="a pop" style="position:absolute;left:50cqw;top:47cqw;translate:-50% 0;z-index:6;--d:3.1s"><div style="background:#142844;color:#fff;border-radius:3cqw;padding:.9cqw 2.2cqw;font-weight:800;font-size:1.5cqw;white-space:nowrap;box-shadow:0 0 0 .5cqw #2E756726">One team for RRB</div></div>
-    <div class="a" style="position:absolute;left:36cqw;top:16.4cqw;width:28cqw;text-align:center;font-size:1.25cqw;line-height:1.4;color:#637383;z-index:5;--d:1.3s">Railway know-how meets a platform that is already live, so RRB gets both from day one.</div>
   </section>`);
 }
 
@@ -775,7 +801,7 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
       <div style="margin-top:.6cqw;font-size:1.05cqw;line-height:1.35"><b>75+ lakh candidates</b> <span style="color:#637383">targeted by the end of this year</span></div>
     </div>
     ${h}
-    <div class="outcome a" style="top:46.6cqw;--d:2.6s">We have done it all, at scale. <em>With RailTel, RRB gets it on day one.</em></div>
+    <div class="outcome a" style="top:46.6cqw;--d:2.6s">We have done it all, at scale. <em>RRB gets it on day one.</em></div>
   </section>`);
 }
 
@@ -789,7 +815,7 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
     ['Critical data locked for good','Key candidate records are stored securely and cannot be altered by anyone once locked'],
   ];
   let h = `<div class="a" style="position:absolute;left:7.2cqw;top:41.2cqw;width:85.6cqw;z-index:5;display:flex;flex-wrap:wrap;gap:.45cqw;align-items:center;--d:1.4s">
-    <span style="font:600 .8cqw 'IBM Plex Mono',Consolas,monospace;letter-spacing:.1em;text-transform:uppercase;color:#637383;width:100%;margin-bottom:.1cqw">Everything RRB’s portal (CSC) does today, we already do</span>
+    <span style="font:600 .8cqw 'IBM Plex Mono',Consolas,monospace;letter-spacing:.1em;text-transform:uppercase;color:#637383;width:100%;margin-bottom:.1cqw">Everything the current RRB portal does today, we already do</span>
     ${par.map(t=>`<span style="display:inline-flex;align-items:center;gap:.4cqw;border:1px solid #14284422;background:#FFFFFFB0;border-radius:2cqw;padding:.22cqw .7cqw;font-size:.84cqw"><b style="color:#2E7567">✓</b>${t}</span>`).join('')}</div>`;
   h += `<div class="a" style="position:absolute;left:7.2cqw;top:45.6cqw;z-index:5;font:600 .8cqw 'IBM Plex Mono',Consolas,monospace;letter-spacing:.1em;text-transform:uppercase;color:#2E7567;--d:1.8s">And where we go further</div>`;
   adv.forEach((o,i)=>{ const x=7.2+i*29.2, d=2+i*.25;
@@ -797,7 +823,7 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
       <span style="flex:none;width:1.9cqw;height:1.9cqw;border-radius:50%;background:#2E7567;color:#fff;display:grid;place-items:center;font-weight:800;font-size:1cqw">✓</span>
       <span><b style="display:block;font-size:1.12cqw;font-weight:800;line-height:1.2">${o[0]}</b><span style="display:block;margin-top:.2cqw;font-size:.88cqw;line-height:1.3;color:#637383">${o[1]}</span></span></div>`; });
   S.push(`<section class="slide" id="s15sbs" aria-label="Side by side">
-    <div class="kicker a" ${D(.1)}>Side by side · RRB (CSC) vs UPESSC</div>
+    <div class="kicker a" ${D(.1)}>Side by side · current RRB portal vs our live system</div>
     ${rise('Everything RRB has today, <em>and more</em>', .2, 'h1', 'h1')}
     <div class="a" style="position:absolute;left:7.2cqw;top:13.8cqw;width:85.6cqw;height:26.75cqw;z-index:5;--d:.5s;border-radius:.6cqw;overflow:hidden;background:#F3F6F4">
       <video class="sbs" src="videos/side_by_side.mp4" muted playsinline loop preload="auto" style="width:100%;height:100%;display:block;object-fit:cover"></video></div>
@@ -809,9 +835,9 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
 S.push(`<section class="slide cv" id="s15" aria-label="Closing">
   <canvas class="field" id="fc15"></canvas>
   <div class="kicker a" ${D(.2)}>For Railway Recruitment Boards</div>
-  <h1 class="h1"><span class="rise" style="--d:.35s">Railway trust.</span><span class="rise" style="--d:.7s">A platform already live.</span><span class="rise" style="--d:1.05s"><em>One track to appointment.</em></span></h1>
+  <h1 class="h1"><span class="rise" style="--d:.35s">A platform already live.</span><span class="rise" style="--d:.7s">Ready for every RRB.</span><span class="rise" style="--d:1.05s"><em>One track to appointment.</em></span></h1>
   <div class="promise"><div class="a" ${D(1.9)}>Every candidate, from first click to joining,</div><div class="a c-green" ${D(2.2)}>on one connected, secure platform.</div></div>
-  <div class="foot a" ${D(2.8)}><b>RailTel</b><span>×</span><b>Innovatiview</b></div>
+  
 </section>`);
 
 
@@ -865,7 +891,7 @@ function cover(cv, mode) {
   const B = t => { const u=1-t; return [u*u*u*P0[0]+3*u*u*t*P1[0]+3*u*t*t*P2[0]+t*t*t*P3[0], u*u*u*P0[1]+3*u*u*t*P1[1]+3*u*t*t*P2[1]+t*t*t*P3[1]]; };
   // arc-length samples
   const raw=[]; for(let i=0;i<=600;i++) raw.push(B(i/600)); const acc=[0]; for(let i=1;i<raw.length;i++) acc.push(acc[i-1]+Math.hypot(raw[i][0]-raw[i-1][0],raw[i][1]-raw[i-1][1]));
-  const L=acc[acc.length-1]; const at_s = s => { let j=acc.findIndex(v=>v>=s); if(j<1) j=1; const a=raw[j-1], b=raw[j]; const dx=b[0]-a[0], dy=b[1]-a[1], l=Math.hypot(dx,dy)||1; return {x:a[0],y:a[1],nx:-dy/l,ny:dx/l}; };
+  const L=acc[acc.length-1]; const at_s = s => { s=Math.max(0,Math.min(L,s)); let lo=1, hi=acc.length-1; while(lo<hi){ const m=(lo+hi)>>1; if(acc[m]<s) lo=m+1; else hi=m; } const j=lo, a=raw[j-1], b=raw[j], seg=(acc[j]-acc[j-1])||1, f=(s-acc[j-1])/seg; const dx=b[0]-a[0], dy=b[1]-a[1], l=Math.hypot(dx,dy)||1; return {x:a[0]+dx*f,y:a[1]+dy*f,nx:-dy/l,ny:dx/l}; }; let angS=null;
   const T=[]; const M=110;
   for(let i=0;i<=M;i++){ const p=at_s(L*i/M); [-11,11].forEach(o=>T.push({x:p.x+p.nx*o,y:p.y+p.ny*o,u:i/M,k:'rail'})); }
   for(let i=0;i<=M;i+=4){ const p=at_s(L*i/M); [-18,-9,0,9,18].forEach(o=>T.push({x:p.x+p.nx*o,y:p.y+p.ny*o,u:i/M,k:'sl'})); }
@@ -890,9 +916,9 @@ function cover(cv, mode) {
     // stations
     st.forEach((s,k)=>{ const e=ease((t-3.9-k*.12)/.5); if(e<=0) return; ctx.fillStyle='#F3F6F4'; ctx.strokeStyle=s.c; ctx.lineWidth=3; ctx.beginPath(); ctx.arc(s.p.x,s.p.y,15*e,0,6.29); ctx.fill(); ctx.stroke(); ctx.fillStyle=s.c; ctx.beginPath(); ctx.arc(s.p.x,s.p.y,6*e,0,6.29); ctx.fill(); });
     // the train
-    if(t>5){ const u=((t-5)%5.2)/5.2, uu=eio(u); const p=at_s(L*uu), q=at_s(Math.min(L,L*uu+1)); const ang=Math.atan2(q.y-p.y,q.x-p.x);
+    if(t>5){ const ts=((t-5)%7)/7, uu=.5-.5*Math.cos(Math.PI*ts), fade=Math.min(1,ts/.05,(1-ts)/.05); const sp=L*uu, p=at_s(sp), qa=at_s(sp-16), qb=at_s(sp+16); let ang=Math.atan2(qb.y-qa.y,qb.x-qa.x); if(angS===null||ts<.01) angS=ang; let da=ang-angS; da=Math.atan2(Math.sin(da),Math.cos(da)); angS+=da*.18; ang=angS;
       st.forEach(s=>{ const dd=Math.abs(s.u-uu); if(dd<.05){ ctx.strokeStyle=s.c; ctx.globalAlpha=1-dd/.05; ctx.lineWidth=2; ctx.beginPath(); ctx.arc(s.p.x,s.p.y,22+ (1-dd/.05)*10,0,6.29); ctx.stroke(); ctx.globalAlpha=1; } });
-      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(ang); ctx.shadowColor='rgba(201,150,43,.7)'; ctx.shadowBlur=18; ctx.fillStyle='#142844'; ctx.beginPath(); ctx.roundRect(-30,-9,54,18,[9,4,4,9]); ctx.fill(); ctx.fillStyle='#C9962B'; ctx.beginPath(); ctx.arc(16,0,4.5,0,6.29); ctx.fill(); ctx.restore(); }
+      ctx.save(); ctx.globalAlpha=fade; ctx.translate(p.x,p.y); ctx.rotate(ang); ctx.shadowColor='rgba(201,150,43,.7)'; ctx.shadowBlur=18; ctx.fillStyle='#142844'; ctx.beginPath(); ctx.roundRect(-30,-9,54,18,[9,4,4,9]); ctx.fill(); ctx.fillStyle='#C9962B'; ctx.beginPath(); ctx.arc(16,0,4.5,0,6.29); ctx.fill(); ctx.restore(); }
     raf=requestAnimationFrame(frame); };
   raf=requestAnimationFrame(frame);
   return fit;
