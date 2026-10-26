@@ -351,6 +351,34 @@ canvas.field{position:absolute;inset:0;width:100%;height:100%;display:block;z-in
 .aleg span{display:flex;align-items:center;gap:.3cqw}
 .aleg i{width:1.2cqw;height:.7cqw;border:1.2px solid;border-radius:.15cqw}
 .aleg i.ams{background:#FBF3E2;border-color:#C9962B}.aleg i.rms{background:#EAF0FC;border-color:#2557DA}.aleg i.db{background:#E8F2EF;border-color:#2E7567}.aleg i.kf{background:#F8ECE5;border-color:#B76A3B}.aleg i.tp{border-color:#637383;border-style:dashed}.aleg i.ws{border-color:#142844;border-style:dashed}
+
+/* slide menu */
+.menubtn{position:absolute;left:1.5cqw;top:1.7cqw;z-index:32;width:2.8cqw;height:2.8cqw;border-radius:.6cqw;border:1px solid #14284422;background:#FFFFFFD0;color:var(--ink);
+  display:grid;place-items:center;cursor:pointer;box-shadow:0 .2cqw .6cqw #1428440f;transition:background .2s,transform .2s}
+.menubtn:hover{background:#fff;transform:translateY(-1px)}
+.menubtn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.menubtn svg{width:1.4cqw;height:1.4cqw}
+.menu{position:absolute;left:0;top:0;bottom:0;width:21.5cqw;z-index:31;background:#F7F9F8F5;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border-right:1px solid #14284418;box-shadow:.6cqw 0 2cqw #14284414;transform:translateX(-102%);transition:transform .45s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;cursor:default}
+.menu.open{transform:none}
+.menu .mh{display:flex;align-items:center;justify-content:space-between;padding:1.9cqw 1.3cqw .9cqw 5cqw}
+.menu .mh b{font:600 .8cqw "IBM Plex Mono",Consolas,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.menu .mh small{font:600 .72cqw "IBM Plex Mono",Consolas,monospace;color:var(--quiet);letter-spacing:.08em}
+.menu .ml{position:relative;flex:1;overflow-y:auto;padding:0 1.1cqw 1.4cqw 1.3cqw;touch-action:pan-y;overscroll-behavior:contain;scrollbar-width:thin}
+.menu .ch{margin:1cqw 0 .45cqw;font:600 .66cqw "IBM Plex Mono",Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--quiet)}
+.menu .mi{display:flex;gap:.7cqw;align-items:flex-start;width:100%;padding:.45cqw;margin:0 0 .35cqw;border:0;border-radius:.6cqw;background:transparent;cursor:pointer;text-align:left;font:inherit;color:var(--ink)}
+.menu .mi:hover{background:#14284409}
+.menu .mi:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.menu .mn{flex:none;width:1.5cqw;padding-top:.2cqw;font:600 .7cqw "IBM Plex Mono",Consolas,monospace;color:var(--quiet);text-align:right}
+.menu .mb{display:block;flex:1;min-width:0}
+.menu .th{display:block;position:relative;width:100%;aspect-ratio:16/9;container-type:inline-size;overflow:hidden;border-radius:.35cqw;border:1px solid #14284420;
+  background:linear-gradient(124deg,#F3F6F4 0 63%,#E8F1F3 63% 100%);transition:transform .25s cubic-bezier(.16,1,.3,1),box-shadow .25s,border-color .25s}
+.menu .mi:hover .th{transform:translateY(-.15cqw) scale(1.02);box-shadow:0 .5cqw 1.2cqw #14284426;border-color:#B76A3B88}
+.menu .mi.cur .th{border:2px solid var(--accent);box-shadow:0 0 0 .25cqw #B76A3B26}
+.menu .mi.cur .mn{color:var(--accent)}
+.menu .th .slide{transition:none!important;pointer-events:none}
+.menu .tt{display:block;margin-top:.3cqw;font-size:.74cqw;font-weight:700;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.menu .vid{position:absolute;left:7.2%;top:24.5%;width:85.6%;height:47.5%;border-radius:2%;background:#14284412;display:grid;place-items:center;font-weight:700;font-size:2.4cqw;color:#637383}
 /* team */
 .sweepline{will-change:left}
 .play .sweepline{animation:sweepx 3.4s cubic-bezier(.45,0,.55,1) .9s both}
@@ -383,8 +411,10 @@ canvas.field{position:absolute;inset:0;width:100%;height:100%;display:block;z-in
   <div class="bar"><i id="bar"></i></div>
   <button class="navbtn" id="prevBtn" aria-label="Previous page">‹</button>
   <button class="navbtn" id="nextBtn" aria-label="Next page">›</button>
-  <div class="keys" id="keys"><span><b>← →</b> page</span><span><b>Click</b> next</span><span><b>R</b> replay</span><span><b>End</b> final frame</span><span><b>F</b> full screen</span></div>
+  <div class="keys" id="keys"><span><b>← →</b> page</span><span><b>Click</b> next</span><span><b>R</b> replay</span><span><b>End</b> final frame</span><span><b>F</b> full screen</span><span><b>M</b> slides</span></div>
   <div class="count" id="count"></div>
+  <button class="menubtn" id="menuBtn" aria-label="Show slides" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></button>
+  <nav class="menu" id="menu" aria-label="Slides" aria-hidden="true"><div class="mh"><b>Slides</b><small id="menuCount"></small></div><div class="ml" id="menuList"></div></nav>
 </div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -979,6 +1009,32 @@ slides.forEach(sl => sl.querySelectorAll('.rise').forEach(el => {
   walk(el);
 }));
 
+
+/* slide menu: live thumbnails of every slide in its final frame */
+const menu = document.getElementById('menu'), menuBtn = document.getElementById('menuBtn'), menuList = document.getElementById('menuList');
+(() => {
+  let html = '';
+  slides.forEach((sl, i) => {
+    if (CHAPTERS[i + 1]) html += `<div class="ch">${CHAPTERS[i + 1]}</div>`;
+    html += `<button class="mi" data-i="${i}" title="${i + 1}. ${sl.getAttribute('aria-label')}"><span class="mn">${String(i + 1).padStart(2, '0')}</span><span class="mb"><span class="th"></span><span class="tt">${sl.getAttribute('aria-label')}</span></span></button>`;
+  });
+  menuList.innerHTML = html;
+  menuList.querySelectorAll('.mi').forEach(b => {
+    const c = slides[+b.dataset.i].cloneNode(true);
+    c.querySelectorAll('[id]').forEach(n => n.removeAttribute('id')); c.removeAttribute('id');
+    c.querySelectorAll('animateMotion,set,canvas').forEach(n => n.remove());
+    c.querySelectorAll('video').forEach(v => { const d = document.createElement('div'); d.className = 'vid'; d.textContent = '▶ Side-by-side video'; v.parentNode.replaceWith(d); });
+    c.className = 'slide on play done'; c.setAttribute('aria-hidden', 'true'); c.style.cssText = 'opacity:1;visibility:visible;transform:none;filter:none';
+    b.querySelector('.th').appendChild(c);
+  });
+  document.getElementById('menuCount').textContent = slides.length + ' slides';
+})();
+const setMenu = open => { menu.classList.toggle('open', open); menu.setAttribute('aria-hidden', open ? 'false' : 'true'); menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  menuBtn.setAttribute('aria-label', open ? 'Hide slides' : 'Show slides');
+  if (open) { const c = menuList.querySelector('.mi.cur'); if (c) menuList.scrollTop = c.offsetTop - menuList.clientHeight / 2 + c.offsetHeight / 2; } };
+menuBtn.addEventListener('click', e => { e.stopPropagation(); setMenu(!menu.classList.contains('open')); });
+menu.addEventListener('click', e => { e.stopPropagation(); const b = e.target.closest('.mi'); if (b) show(+b.dataset.i); });
+const markMenu = i => menuList.querySelectorAll('.mi').forEach(b => b.classList.toggle('cur', +b.dataset.i === i));
 let at = -1, timers = [], raf = 0, switching = false;
 const clear = () => { timers.forEach(clearTimeout); timers = []; cancelAnimationFrame(raf); raf = 0; };
 const later = (fn, ms) => timers.push(setTimeout(fn, ms));
@@ -1060,6 +1116,7 @@ function place(i, filmed) {
   deck.classList.toggle('cover', at === 0 || at === N - 1);
   document.getElementById('bar').style.width = ((at + 1) / N * 100) + '%';
   document.getElementById('count').textContent = String(at + 1).padStart(2, '0') + ' / ' + String(N).padStart(2, '0');
+  markMenu(at);
   try { if (location.hash !== '#' + (at + 1)) history.replaceState(null, '', '#' + (at + 1)); } catch (e) {}
   play(at, filmed ? 1150 : 120);
 }
@@ -1086,6 +1143,8 @@ document.getElementById('prevBtn').addEventListener('click', e => { e.stopPropag
 document.body.addEventListener('click', e => { if (!deck.contains(e.target)) { wake(); next(); } });
 addEventListener('keydown', e => {
   const k = e.key.toLowerCase(); let h = true;
+  if (k === 'm') { setMenu(!menu.classList.contains('open')); e.preventDefault(); return; }
+  if (e.key === 'Escape' && menu.classList.contains('open')) { setMenu(false); return; }
   if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') next();
   else if (e.key === 'ArrowLeft' || e.key === 'PageUp') prev();
   else if (e.key === 'Home') show(0);
@@ -1097,7 +1156,7 @@ addEventListener('keydown', e => {
 });
 let tx = 0, ty = 0, tt = 0;
 addEventListener('touchstart', e => { const t = e.touches[0]; tx = t.clientX; ty = t.clientY; tt = Date.now(); }, { passive: true });
-addEventListener('touchend', e => { const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty;
+addEventListener('touchend', e => { if (menu.contains(e.target)) return; const t = e.changedTouches[0], dx = t.clientX - tx, dy = t.clientY - ty;
   if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy) && Date.now() - tt < 700) { e.preventDefault(); dx < 0 ? next() : prev(); } }, { passive: false });
 let idle; function wake() { deck.classList.remove('idle'); clearTimeout(idle); idle = setTimeout(() => deck.classList.add('idle'), 3200); }
 addEventListener('mousemove', wake, { passive: true });
