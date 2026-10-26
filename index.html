@@ -854,10 +854,10 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
       ['RMS database','16 vCPU, 128 GB RAM · primary, live replica and DR standby'],
       ['Protection','Synchronous replica in DC: no data lost if a database fails'],
       ['Connections','Pooled · up to 450 AMS and 100 RMS at once']]],
-    ['Storage','720 TB','live, from year 3','#2E7567',[
-      ['New documents','240 TB a year at 10 MB per candidate'],
+    ['Storage','144 TB','live, from year 3','#2E7567',[
+      ['New documents','48 TB a year at 2 MB per application'],
       ['Live retention','3 years online, mirrored to DR'],
-      ['Backup','5 years retained, 1,200 TB by year 5'],
+      ['Backup','5 years retained, 240 TB by year 5'],
       ['Tamper-proof','Object-locked backups cannot be altered or deleted']]],
   ];
   let h='<div style="position:absolute;left:7.2cqw;top:15.2cqw;width:85.6cqw;display:flex;gap:.6cqw;flex-wrap:wrap;z-index:5">';
@@ -914,7 +914,7 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
   h += box(53.2,34.0,10.4,3.0,'db','RMS DB · 6 TB','primary + sync replica',1.75);
   h += box(22.2,37.6,41.4,2.0,'kf','Kafka + Debezium · AMS ↔ RMS sync (outbox)','',1.8);
   h += box(22.2,40.1,8.2,2.0,'kf','Redis · AMS + RMS','',1.85);
-  h += box(31.0,40.1,32.6,2.0,'db','Object store · 8 nodes · 720 TB docs · 1,280 TB raw','',1.9);
+  h += box(31.0,40.1,32.6,2.0,'db','Object store · 8 nodes · 144 TB docs · 256 TB raw','',1.9);
   h += box(22.2,42.6,41.4,1.9,'db','Patroni + etcd (DC only) · DC backup repo 3 nodes · 264 TB raw','',1.95);
   h += box(21,45.7,43.8,2.5,'nt','Observability · SIEM · Vault / KMS · PAM · bastion · CI/CD','',2.0);
   // DR
@@ -924,8 +924,8 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
   h += box(68.4,25.6,25.8,2.3,'kf','Kafka · MirrorMaker 2 target','',2.25);
   h += box(68.4,34.0,25.8,2.0,'db','AMS DR standby · 6 TB · async','',2.3);
   h += box(68.4,36.4,25.8,2.0,'db','RMS DR standby · 6 TB · async','',2.35);
-  h += box(68.4,39.4,25.8,2.0,'db','Object replica · 8 nodes · 1,280 TB raw','',2.4);
-  h += box(68.4,42.1,25.8,2.9,'db','Backup repo · 3 nodes · 2,442 TB raw','object lock · 1,359 TB logical by year 5',2.45);
+  h += box(68.4,39.4,25.8,2.0,'db','Object replica · 8 nodes · 256 TB raw','',2.4);
+  h += box(68.4,42.1,25.8,2.9,'db','Backup repo · 3 nodes · 717 TB raw','object lock · 399 TB logical by year 5',2.45);
   h += box(68.4,45.7,25.8,2.5,'nt','Independent observability · break-glass','',2.5);
   // recovery strip
   h += `<div class="arec a" style="--d:2.8s"><span><b>RTO 45 min · RPO 30 min</b> DR promotion is a human decision after fencing</span><span><b>Replication is recovery, not backup.</b> Object-locked repositories at both sites, 3 + 3 nodes</span></div>`;
@@ -970,9 +970,9 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
 
 /* 10 ─ capacity over time */
 {
-  const yrs=['Year 1','Year 2','Year 3','Year 4','Year 5'], live=[240,480,720,720,720], bak=[240,480,720,960,1200];
-  const base=730, k=380/1200; let svg='';
-  [0,300,600,900,1200].forEach(v=>{ const y=base-v*k; svg+=`<path d="M690 ${y}H1490" stroke="#14284414" stroke-width="1"/><text x="676" y="${y+5}" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="15" fill="#637383">${v}</text>`; });
+  const yrs=['Year 1','Year 2','Year 3','Year 4','Year 5'], live=[48,96,144,144,144], bak=[48,96,144,192,240];
+  const base=730, k=380/240; let svg='';
+  [0,60,120,180,240].forEach(v=>{ const y=base-v*k; svg+=`<path d="M690 ${y}H1490" stroke="#14284414" stroke-width="1"/><text x="676" y="${y+5}" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="15" fill="#637383">${v}</text>`; });
   yrs.forEach((yr,i)=>{ const gx=730+i*152, d=1+i*.22;
     [[live[i],'#2E7567',0],[bak[i],'#2557DA',58]].forEach(([v,c,o],j)=>{ const hgt=v*k;
       svg+=`<rect class="gy" x="${gx+o}" y="${base-hgt}" width="52" height="${hgt}" rx="4" fill="${c}" style="--d:${d+j*.12}s"/>`;
@@ -985,10 +985,10 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
     <div class="kicker a" ${D(.1)}>Capacity and resilience</div>
     ${rise('Compute flexes, <em>storage grows</em>', .2, 'h1', 'h1')}
     ${h}
-    <div class="lab a" style="left:43cqw;top:16.2cqw;--d:.7s">Storage plan, terabytes<small>2.4 crore candidates a year × 10 MB each</small></div>
+    <div class="lab a" style="left:43cqw;top:16.2cqw;--d:.7s">Storage plan, terabytes<small>2.4 crore applications a year × 2 MB each</small></div>
     <div class="legend a" style="left:auto;right:7.2cqw;transform:none;top:17cqw;--d:.8s"><span><i style="background:#2E7567"></i>Live data</span><span><i style="background:#2557DA"></i>Backups</span></div>
     <svg class="over" viewBox="0 0 1600 900">${svg}</svg>
-    <div class="a" style="position:absolute;left:43cqw;top:50cqw;width:50cqw;font-size:1.05cqw;color:#637383;--d:2.6s">Live data levels off at 720 TB once the three-year window fills; backups keep growing to 1.2 PB.</div>
+    <div class="a" style="position:absolute;left:43cqw;top:50cqw;width:50cqw;font-size:1.05cqw;color:#637383;--d:2.6s">Live data levels off at 144 TB once the three-year window fills; backups keep growing to 240 TB.</div>
     <div class="a" style="position:absolute;left:7.2cqw;top:48.4cqw;width:30cqw;font-size:1.05cqw;line-height:1.4;color:#637383;--d:1.6s">Compute scales with traffic. Storage is added as candidate data builds up, not bought for year five on day one.</div>
   </section>`);
 }
