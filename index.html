@@ -457,10 +457,18 @@ canvas.field{position:absolute;inset:0;width:100%;height:100%;display:block;z-in
 .wcol{position:absolute;top:15.2cqw;z-index:5}
 .wg+.wg{margin-top:1.15cqw}
 .wgh{font:600 .74cqw "IBM Plex Mono",Consolas,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);line-height:1.35}
-.wgr{height:2px;background:var(--ink);opacity:.85;margin:.4cqw 0 .1cqw}
+.wgr{height:1.5px;background:var(--ink);opacity:.55;margin:.4cqw 0 .1cqw}
 .wgn{margin:.35cqw 0 .15cqw;font-size:.84cqw;line-height:1.3;color:var(--quiet)}
 .wi{display:flex;gap:.6cqw;align-items:baseline;padding:.27cqw 0;border-bottom:1px solid #14284414;font-size:.92cqw;line-height:1.22;font-weight:600;color:var(--ink);cursor:help}
-.wi .wn{flex:none;width:1.35cqw;font:600 .72cqw "IBM Plex Mono",Consolas,monospace;color:var(--accent)}
+.wi .wn{flex:none;width:1.35cqw;font:600 .72cqw "IBM Plex Mono",Consolas,monospace;color:var(--cn,var(--accent))}
+.wph{height:3.6cqw;margin-bottom:.8cqw}
+.wpr{height:.3cqw;border-radius:.15cqw;background:var(--c)}
+.wph.both .wpr{background:linear-gradient(90deg,var(--amber) 0 50%,var(--blue) 50% 100%)}
+.wpt{display:flex;align-items:baseline;justify-content:space-between;gap:.8cqw;margin-top:.6cqw}
+.wpt b{font-size:1.45cqw;font-weight:800;line-height:1.1;letter-spacing:-.01em;color:var(--c)}
+.wpt i{font:600 .7cqw "IBM Plex Mono",Consolas,monospace;font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet)}
+.wps{margin-top:.12cqw;font-size:.84cqw;font-weight:600;color:var(--quiet)}
+.wboth{margin-top:1.8cqw}
 </style>
 </head>
 <body>
@@ -699,85 +707,91 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
   </section>`);
 }
 
-/* 7 ─ wishlist: what we need from RRB (the 43 items of the RRB AMS-RMS Wishlist) */
+/* 6 ─ wishlist: what we need from RRB, by platform (37 items, numbered in the order of the wishlist sheet) */
 {
-  // [group, note, [[name on slide, description, full name if shortened]]]
-  const WL = [
-    ['Payments and communications', '', [
-      ['Payment gateway / S2S integration', 'Provide gateway/S2S specification, test credentials, endpoints, callback/status APIs, transaction identifiers and settlement flow.'],
-      ['Bank account authenticator', 'Provide NPCI integration API for bank account verification and seeding validation.'],
-      ['Refund bank interface', 'Provide refund interface/API or file format, eligibility/attendance inputs, bank-account requirements, status flow and reconciliation process.'],
-      ['Email helpdesk and notification setup', 'Provide approved email sender details.'],
-      ['Documents for DLT and WhatsApp', 'Documents for SMS and WhatsApp message API registration.']]],
-    ['Debar management', '', [
-      ['Initial master debar data', 'Provide the format with required identity details, debarment list, period and supporting fields for screening.'],
-      ['Cross-exam UFM / entity-resolution data', 'Provide access/feed for debarment or UFM decisions from other examinations and the approved matching/entity-resolution rules.'],
-      ['Debar workflow and authority rules', 'Provide maker/checker/final-approval hierarchy and permissions/rules for adding, editing, uploading, deleting, approving and revoking debarment records.']]],
-    ['ECA interfaces and results', '', [
-      ['ECA outbound candidate-data interface', 'Provide the candidate/master-data schema, mandatory fields, file/API format, validation rules and representative test data for transfer to ECA.'],
-      ['ECA result inbound interface', 'Provide result schema, candidate mapping keys, representative test files/API payloads and validation rules for importing results from ECA.'],
-      ['Exam-process report formats', 'Provide required formats/data structures for CC, Incident, Attendance, PUFM and other examination-process reports.'],
-      ['Merit and qualifying rules', 'Provide qualifying marks, merit-validation logic and rule sets required to validate imported ECA results.']]],
-    ['Medical and HMIS', '', [
-      ['HMIS outbound interface', 'Provide HMIS schema/API or file format, test endpoint/access and required candidate, image and medical-referral fields.'],
-      ['Medical workflow and referral rules', 'Provide medical referral workflow, required data fields, medical-authority routing, statuses and exception rules.'],
-      ['HMIS inbound interface', 'Provide return schema/API or file format for medical outcome, medical status and candidate image/details received from HMIS.']]],
-    ['HRMS, appointment and joining', '', [
-      ['HRMS panel and dossier interface', 'Provide HRMS schema/API or file format, test access and required fields for panel, digital DV dossier and authenticated candidate data.'],
-      ['Appointment and joining interface', 'Provide appointment/reporting/joining data requirements, status values, update flow and exception handling required for integration.'],
-      ['HRMS test connectivity', 'Provide HRMS test environment access, endpoint/network connectivity and credentials required for integration testing.']]],
-    ['Configuration and business rules', '', [
-      ['CEN / post configuration and business rules', 'Provide CEN-wise/post-wise eligibility rules, mandatory fields, validations, vacancy/post mappings, category/community rules and configurable workflow inputs.'],
-      ['Test centre audit configuration', 'Provide audit workflow, checklist/data fields, evidence requirements, prescribed report formats and review/approval process. Centre audit workflow, upload/record supporting evidence, consolidation and analysis.'],
-      ['Document verification configuration', 'Provide DV scheduling/call-letter requirements, document checklist, verification rules, outcome/status values, exception handling and digital dossier structure.'],
-      ['Final result / panel rules', 'Provide panel-generation rules, merit/reservation/eligibility rules, approval hierarchy, version-control requirements and final panel output structure.'],
-      ['Dashboard / MIS requirements', 'Provide required KPIs, dashboard views, report formats, filters, drill-downs and role-wise data visibility for AMS/RMS dashboards.'],
-      ['Data handover / export requirements', 'Provide required database extracts, documents, reports, editable/non-editable formats, RRB-wise access and final data-handover structure.'],
-      ['RRB website / application-link requirements', 'Provide required application URLs/links, participating-RRB mapping and publishing/access requirements for RRB websites.']]],
-    ['RMS roles and users', 'Named users, groups and rights for each RMS module', [
-      ['Indent management', 'Provide role names, nominated users/user groups, Railway unit/RRB/RRCB mapping, access rights and maker/checker/approver hierarchy. Creation and submission of vacancy indents formats, sanctioned strength/reservation validation checks, digital approval and modification workflow, indent history and modifications workflow.', 'RMS Indent Management roles and users'],
-      ['Test centre audit', 'Provide users/user groups and rights for audit entry, evidence upload, review, approval, consolidation and report access. Centre audit workflow, upload/record supporting evidence format, analysis report format.', 'RMS Test Centre Audit roles and users'],
-      ['Complaints and grievances', 'Provide helpdesk/RRB users, assignment rights, escalation ownership, response/closure authority and visibility rules.', 'RMS Complaints & Grievances roles and users'],
-      ['Exam process reports', 'Provide users/user groups and access rights for capture, review, consolidation and viewing of CC, Incident, Attendance, PUFM and related reports.', 'RMS Exam Process Reports roles and users'],
-      ['Result import and merit validation', 'Provide authorized users/user groups for result import, validation review, exception handling, approval and report access.', 'RMS Result Import & Merit Validation roles and users'],
-      ['Document verification', 'Provide DV users/user groups and rights for scheduling, attendance, document/identity verification, exception handling, approval and dossier access.', 'RMS Document Verification roles and users'],
-      ['Medical and HMIS', 'Provide RRB/medical-authority users and rights for referral, medical advice, status tracking, outcome access and exception handling.', 'RMS Medical & HMIS roles and users'],
-      ['Final result and panel', 'Provide users/user groups and approval hierarchy for result preparation, panel review, reservation/eligibility validation and final approval. Panel generation rules, horizontal/vertical reservation rules, panel approval and version control format, panel distribution to zones/units rules.', 'RMS Final Result & Panel roles and users'],
-      ['Panel distribution and HRMS', 'Provide authorized users/user groups for panel distribution, dossier access, dispatch/receipt tracking and HRMS transfer monitoring.', 'RMS Panel Distribution & HRMS roles and users'],
-      ['Appointment and joining', 'Provide authorized Railway-unit/HRMS users or groups for appointment, reporting/joining updates, document/authentication access and exceptions.', 'RMS Appointment & Joining roles and users'],
-      ['Management information system', 'Role-based dashboards users and responsibilities, types of analytics required, prescribed/custom reports format, complete activity and approval logs report submission workflow.', 'RMS Management information system'],
-      ['Lifecycle dashboard and candidate status', 'Provide dashboard/report role matrix, nominated users/user groups, RRB/Railway Board mapping and role-wise data visibility.', 'RMS Lifecycle Dashboard & Candidate Status roles and users']]],
-    ['Test environment and contacts', '', [
-      ['RMS test environment', 'RMS test users for all roles and hierarchies.'],
-      ['Technology and security escalation contacts', 'Provide named technical, infrastructure, security and local coordination contacts for integration setup, issue resolution and escalation.']]],
-    ['Identity and document verification APIs', '', [
-      ['Aadhaar authentication API', 'Provide API specification, test credentials, test endpoints, callback/error details and the approved Aadhaar authentication flow.'],
-      ['DL authentication API', 'Provide API specification, test credentials, test endpoints, callback/error details and the approved DL authentication flow.'],
-      ['Passport authentication API', 'Provide API specification, test credentials, test endpoints, callback/error details and the approved Passport authentication flow.'],
-      ['DigiLocker integration', 'Provide interface specification, test access, consent/authentication flow and mapping of DigiLocker documents required in AMS/RMS.']]],
-  ];
-  const esc = t => t.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
-  const first = []; WL.reduce((n,g,i) => (first[i] = n) + g[2].length, 1);   // item numbers follow the wishlist, 1 to 43
-  const COLS = [[0,1,2],[3,4,5],[6],[7,8]], gap = 1.6, w = (85.6 - 3*gap) / 4;
-  let h = '';
-  COLS.forEach((gs, c) => { let d = .45 + c*.28;
-    h += `<div class="wcol" style="left:${(7.2 + c*(w+gap)).toFixed(2)}cqw;width:${w.toFixed(2)}cqw">`;
-    gs.forEach(gi => { const [name, note, items] = WL[gi];
-      h += `<div class="wg"><div class="wgh a" style="--d:${d.toFixed(2)}s">${name}</div><div class="wgr gx" style="--d:${(d+.05).toFixed(2)}s;--t:.6s"></div>`;
-      if (note) h += `<div class="wgn a" style="--d:${(d+.1).toFixed(2)}s">${note}</div>`;
-      d += .12;
-      items.forEach((it, k) => { const n = first[gi] + k;
-        h += `<div class="wi a l" style="--d:${d.toFixed(2)}s" title="${esc(`${n}. ${it[2] || it[0]}: ${it[1]}`)}"><span class="wn">${String(n).padStart(2,'0')}</span><span>${it[0]}</span></div>`;
-        d += .045; });
-      h += `</div>`; });
-    h += `</div>`; });
-  const x4 = 7.2 + 3*(w+gap), total = WL.reduce((n,g) => n + g[2].length, 0);
-  h += `<div class="stat" style="left:${x4.toFixed(2)}cqw;top:37.2cqw;width:${w.toFixed(2)}cqw"><div class="hl gx" style="--d:2.2s;--t:.6s"></div>
-    <div class="n a" style="--d:2.3s"><span data-n="${total}" data-delay="2.3">${total}</span><small>items</small></div>
-    <div class="d a" style="--d:2.5s">Specifications, test access, rules and named users, each detailed in the RRB AMS-RMS Wishlist</div></div>`;
+  // n: [name on slide, description, why it sits on this platform, full name if shortened on the slide]
+  const IT = {
+    1: ['Payment gateway / S2S integration', 'Provide gateway/S2S specification, test credentials, endpoints, callback/status APIs, transaction identifiers and settlement flow.', 'Application fee/payment activity'],
+    2: ['Bank account authenticator', 'Provide NPCI integration API for bank account verification and seeding validation.', 'Bank verification/seeding for application/refund'],
+    3: ['Refund bank interface', 'Provide refund interface/API or file format, eligibility/attendance inputs, bank-account requirements, status flow and reconciliation process.', 'Candidate fee/refund process'],
+    4: ['Documents for DLT and WhatsApp', 'Documents for SMS and WhatsApp message API registration. Department is requested to take a printout on department letter head and upload the document with seal and sign.', 'Common candidate communication enablement'],
+    5: ['CEN / post configuration and business rules', 'Provide CEN-wise/post-wise eligibility rules, mandatory fields, validations, vacancy/post mappings, category/community rules and configurable workflow inputs.', 'RMS provides post/vacancy context; AMS consumes eligibility, form and validation rules'],
+    6: ['Initial master debar data', 'Provide the format with required identity details, debarment list, period and supporting fields for screening.', 'Debar management'],
+    7: ['RRB domain / application-link requirements', 'Provide required application URLs/links, participating-RRB mapping and publishing/access requirements for RRB websites.', 'Candidate application access/publishing'],
+    8: ['Dashboard / MIS requirements', 'Provide required KPIs, dashboard views, report formats, filters, drill-downs and role-wise data visibility for AMS/RMS dashboards.', 'Wishlist explicitly covers AMS/RMS dashboards'],
+    9: ['Cross-exam UFM / entity-resolution data', 'Provide access/feed for debarment or UFM decisions from other examinations and the approved matching/entity-resolution rules.', 'UFM/debarment management'],
+    10: ['Debar workflow and authority rules', 'Provide maker/checker/final-approval hierarchy and permissions/rules for adding, editing, uploading, deleting, approving and revoking debarment records.', 'Debarment workflow and approvals'],
+    11: ['ECA outbound candidate-data interface', 'Provide the candidate/master-data schema, mandatory fields, file/API format, validation rules and representative test data for transfer to ECA.', 'ECA interface and examination-stage data transfer'],
+    12: ['ECA result inbound interface', 'Provide result schema, candidate mapping keys, representative test files/API payloads and validation rules for importing results from ECA.', 'Result import from ECA'],
+    13: ['Exam-process report formats', 'Provide required formats/data structures for CC, Incident, Attendance, PUFM and other examination-process reports.', 'Examination process reports'],
+    14: ['Merit and qualifying rules', 'Provide qualifying marks, merit-validation logic and rule sets required to validate imported ECA results.', 'Result and merit validation'],
+    15: ['HMIS outbound interface', 'Provide HMIS schema/API or file format, test endpoint/access and required candidate, image and medical-referral fields.', 'Medical workflow integration'],
+    16: ['Medical workflow and referral rules', 'Provide medical referral workflow, required data fields, medical-authority routing, statuses and exception rules.', 'Post-exam medical activity'],
+    17: ['HMIS inbound interface', 'Provide return schema/API or file format for medical outcome, medical status and candidate image/details received from HMIS.', 'Medical outcome import'],
+    18: ['HRMS panel and dossier interface', 'Provide HRMS schema/API or file format, test access and required fields for panel, digital DV dossier and authenticated candidate data.', 'Panel and dossier handover'],
+    19: ['Appointment and joining interface', 'Provide appointment/reporting/joining data requirements, status values, update flow and exception handling required for integration.', 'Post-panel recruitment lifecycle'],
+    20: ['HRMS test connectivity', 'Provide HRMS test environment access, endpoint/network connectivity and credentials required for integration testing.', 'HRMS integration testing'],
+    21: ['Test centre audit configuration', 'Provide audit workflow, checklist/data fields, evidence requirements, prescribed report formats and review/approval process. Centre audit workflow, upload/record supporting evidence, consolidation and analysis.', 'Explicit RMS activity'],
+    22: ['Document verification configuration', 'Provide DV scheduling/call-letter requirements, document checklist, verification rules, outcome/status values, exception handling and digital dossier structure.', 'Post-exam document verification'],
+    23: ['Final result / panel rules', 'Provide panel-generation rules, merit/reservation/eligibility rules, approval hierarchy, version-control requirements and final panel output structure.', 'Result and panel preparation'],
+    24: ['Indent management', 'Provide role names, nominated users/user groups, Railway unit/RRB/RRCB mapping, access rights and maker/checker/approver hierarchy. Creation and submission of vacancy indents formats, sanctioned strength/reservation validation checks, digital approval and modification workflow, indent history and modifications workflow.', 'Explicit RMS role setup', 'RMS Indent Management roles and users'],
+    25: ['Test centre audit', 'Provide users/user groups and rights for audit entry, evidence upload, review, approval, consolidation and report access. Centre audit workflow, upload/record supporting evidence format, analysis report format.', 'Explicit RMS role setup', 'RMS Test Centre Audit roles and users'],
+    26: ['Complaints and grievances', 'Provide helpdesk/RRB users, assignment rights, escalation ownership, response/closure authority and visibility rules.', 'Explicit RMS role setup', 'RMS Complaints & Grievances roles and users'],
+    27: ['Exam process reports', 'Provide users/user groups and access rights for capture, review, consolidation and viewing of CC, Incident, Attendance, PUFM and related reports.', 'Explicit RMS role setup', 'RMS Exam Process Reports roles and users'],
+    28: ['Result import and merit validation', 'Provide authorized users/user groups for result import, validation review, exception handling, approval and report access.', 'Explicit RMS role setup', 'RMS Result Import & Merit Validation roles and users'],
+    29: ['Document verification', 'Provide DV users/user groups and rights for scheduling, attendance, document/identity verification, exception handling, approval and dossier access.', 'Explicit RMS role setup', 'RMS Document Verification roles and users'],
+    30: ['Medical and HMIS', 'Provide RRB/medical-authority users and rights for referral, medical advice, status tracking, outcome access and exception handling.', 'Explicit RMS role setup', 'RMS Medical & HMIS roles and users'],
+    31: ['Final result and panel', 'Provide users/user groups and approval hierarchy for result preparation, panel review, reservation/eligibility validation and final approval. Panel generation rules, horizontal/vertical reservation rules, panel approval and version control format, panel distribution to zones/units rules.', 'Explicit RMS role setup', 'RMS Final Result & Panel roles and users'],
+    32: ['Panel distribution and HRMS', 'Provide authorized users/user groups for panel distribution, dossier access, dispatch/receipt tracking and HRMS transfer monitoring.', 'Explicit RMS role setup', 'RMS Panel Distribution & HRMS roles and users'],
+    33: ['Appointment and joining', 'Provide authorized Railway-unit/HRMS users or groups for appointment, reporting/joining updates, document/authentication access and exceptions.', 'Explicit RMS role setup', 'RMS Appointment & Joining roles and users'],
+    34: ['Management information system', 'Role-based dashboards users and responsibilities, types of analytics required, prescribed/custom reports format, complete activity and approval logs report submission workflow.', 'Explicit RMS MIS requirement', 'RMS Management information system'],
+    35: ['Lifecycle dashboard and candidate status', 'Provide dashboard/report role matrix, nominated users/user groups, RRB/Railway Board mapping and role-wise data visibility.', 'Explicit RMS dashboard requirement', 'RMS Lifecycle Dashboard & Candidate Status roles and users'],
+    36: ['Test environment', 'RMS test users for all roles and hierarchies.', 'Explicit RMS test environment', 'RMS Test Environment'],
+    37: ['Technology and security escalation contacts', 'Provide named technical, infrastructure, security and local coordination contacts for integration setup, issue resolution and escalation.', 'Technology/security dependency across both modules'],
+  };
+  const AMBER = '#C9962B', BLUE = '#2557DA';
+  // a platform: header label, full name, colour, number colour, classification label, groups [area, note, item numbers]
+  const AMS = { label: 'AMS', name: 'Application Management System', c: AMBER, cn: '#8E6510', cls: 'AMS', groups: [
+    ['Payments and communication', '', [1, 2, 3, 4]],
+    ['Application setup and screening', '', [5, 6, 7]]] };
+  const BOTH = { label: `<span style="color:${AMBER}">AMS</span> + <span style="color:${BLUE}">RMS</span>`, name: 'Needed on both platforms', c: 'var(--ink)', cn: 'var(--ink)', cls: 'AMS + RMS', groups: [
+    ['', '', [8, 37]]] };
+  const RMS = { label: 'RMS', name: 'Recruitment Management System', c: BLUE, cn: BLUE, cls: 'RMS', cols: [
+    [['Debar and UFM', '', [9, 10]], ['ECA interfaces and results', '', [11, 12, 13, 14]]],
+    [['Medical and HMIS', '', [15, 16, 17]], ['HRMS, appointment and joining', '', [18, 19, 20]], ['Configuration and business rules', '', [21, 22, 23]]],
+    [['Roles and users', 'Named users, groups and rights for each RMS module', [24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]]]] };
+  const esc = t => t.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+  const nn = n => String(n).padStart(2, '0');
+  const count = pl => (pl.groups || pl.cols.flat()).reduce((k, g) => k + g[2].length, 0);
+  const head = (pl, d0) => `<div class="wph${pl === BOTH ? ' both' : ''}" style="--c:${pl.c}">
+      <div class="wpr gx" style="--d:${d0.toFixed(2)}s;--t:.7s"></div>
+      <div class="wpt a" style="--d:${(d0 + .08).toFixed(2)}s"><b>${pl.label}</b><i>${count(pl)} items</i></div>
+      <div class="wps a" style="--d:${(d0 + .14).toFixed(2)}s">${pl.name}</div></div>`;
+  let d = 0;
+  const group = (pl, [area, note, nums]) => {
+    let h = '<div class="wg">';
+    if (area) { h += `<div class="wgh a" style="--d:${d.toFixed(2)}s">${area}</div><div class="wgr gx" style="--d:${(d + .05).toFixed(2)}s;--t:.6s"></div>`; d += .1; }
+    if (note) h += `<div class="wgn a" style="--d:${d.toFixed(2)}s">${note}</div>`;
+    nums.forEach(n => { const [name, desc, why, full] = IT[n];
+      h += `<div class="wi a l" style="--d:${d.toFixed(2)}s" title="${esc(`${nn(n)} · ${full || name}\n${desc}\n${pl.cls}: ${why}`)}"><span class="wn">${nn(n)}</span><span>${name}</span></div>`;
+      d += .04; });
+    return h + '</div>';
+  };
+  const gap = 1.6, w = (85.6 - 3 * gap) / 4, x = c => (7.2 + c * (w + gap)).toFixed(2);
+  // column 1: AMS, then the items needed on both platforms
+  d = .62;
+  let h = `<div class="wcol" style="left:${x(0)}cqw;top:15.2cqw;width:${w.toFixed(2)}cqw;--cn:${AMS.cn}">${head(AMS, .45)}${AMS.groups.map(g => group(AMS, g)).join('')}`;
+  d += .15;
+  h += `<div class="wboth" style="--cn:${BOTH.cn}">${head(BOTH, d)}`;
+  d += .22;
+  h += BOTH.groups.map(g => group(BOTH, g)).join('') + '</div></div>';
+  // columns 2 to 4: RMS under one header
+  h += `<div class="wcol" style="left:${x(1)}cqw;top:15.2cqw;width:${(3 * w + 2 * gap).toFixed(2)}cqw">${head(RMS, .7)}</div>`;
+  RMS.cols.forEach((gs, c) => { d = .9 + c * .25;
+    h += `<div class="wcol" style="left:${x(c + 1)}cqw;top:19.6cqw;width:${w.toFixed(2)}cqw;--cn:${RMS.cn}">${gs.map(g => group(RMS, g)).join('')}</div>`; });
   S.push(`<section class="slide" id="s16wl" aria-label="Wishlist">
-    <div class="kicker a" ${D(.1)}>Wishlist · inputs from RRB</div>
-    ${rise('What we need from RRB, <em>in nine areas</em>', .2, 'h1', 'h1')}
+    <div class="kicker a" ${D(.1)}>Wishlist · ${Object.keys(IT).length} inputs from RRB</div>
+    ${rise('What we need from RRB, <em>for AMS and RMS</em>', .2, 'h1', 'h1')}
     ${h}
   </section>`);
 }
