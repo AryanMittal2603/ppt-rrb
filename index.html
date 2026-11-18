@@ -853,17 +853,17 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
     ['Implement', 'Only the approved change, tracked against the commitment'], ['Validate', 'Demonstrate to RRB and fold in corrections'],
     ['Close', 'Acceptance, decision and closure date recorded']];
   const tag = t => `<i class="gvtag">${t}</i>`;
-  const label = (n, t, rfp, d) => `<div class="gvl a" style="--d:${d}s"><span>${n} · ${t}</span>${tag(rfp)}</div><div class="gvrule gx" style="--d:${d + .05}s;--t:.6s"></div>`;
+  const label = (n, t, d) => `<div class="gvl a" style="--d:${d}s"><span>${n} · ${t}</span></div><div class="gvrule gx" style="--d:${d + .05}s;--t:.6s"></div>`;
   const dots = k => `<span class="gvd">${k ? '<b></b>'.repeat(k) : '<s></s>'}</span>`;
 
-  let c1 = label('01', 'Governance cadence', 'RFP Part III · cl 7, 8', .45);
+  let c1 = label('01', 'Governance cadence', .45);
   CAD.forEach(([t, who, cov, out, k], i) => {
     c1 += `<div class="gvc a" style="--d:${(.6 + i*.14).toFixed(2)}s"><div class="gvct"><span>${t}</span>${dots(k)}</div>
       <div class="gvcw"><span>${who}</span><em>${k ? k + ' a quarter' : 'always on'}</em></div>
       <div class="gvcv">${cov}</div><div class="gvco">${out}</div></div>`; });
-  c1 += `<div class="gvn a" style="--d:1.25s">Agenda before and MoM after every meeting. Formal communication stays in writing.${tag('RFP Part III · cl 16.4')}</div>`;
+  c1 += `<div class="gvn a" style="--d:1.25s">Agenda before and MoM after every meeting. Formal communication stays in writing.</div>`;
 
-  let c2 = label('02', 'One governance tracker', 'RFP Part II · cl 5.1', .95);
+  let c2 = label('02', 'One governance tracker', .95);
   c2 += `<div class="gvt a" style="--d:1.1s"><div class="gvth"><span>Governance tracker</span><i>one record</i></div>
     <div class="gvts">Everything raised with RRB, in one place</div>
     <div class="gvch">${TYPES.map(t => `<span>${t}</span>`).join('')}</div>
@@ -871,9 +871,9 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
     <div class="gvtf">Open and overdue items stay visible until closed</div></div>
     <div class="gve a" style="--d:1.4s"><div class="gvel"><span>Escalation matrix</span>${tag('as set in the RFP')}</div>
       <div class="gvec">${ESC.map(t => `<span>${t}</span>`).join('')}</div></div>
-    <div class="gvn a" style="--d:1.55s">Candidate grievances stay in the RFP grievance system; their status and ageing feed these reviews.${tag('RFP Part II · cl 2.2(v), 2.3(ii)')}</div>`;
+    <div class="gvn a" style="--d:1.55s">Candidate grievances stay in the RFP grievance system; their status and ageing feed these reviews.</div>`;
 
-  let c3 = label('03', 'Change control', 'RFP Part III · cl 16.16, 17.2.4', 1.5);
+  let c3 = label('03', 'Change control', 1.5);
   c3 += `<div class="gvs">${STEPS.map(([t, v], i) => `<div class="gvsr${i === 3 ? ' gate' : i === 6 ? ' end' : ''} a l" style="--d:${(1.65 + i*.12).toFixed(2)}s">
       <i>${i + 1}</i><div><b>${t}</b><span>${v}</span></div>${i === 3 ? '<em>No written approval, no work</em>' : ''}</div>`).join('')}</div>`;
 
