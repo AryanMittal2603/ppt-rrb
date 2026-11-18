@@ -490,7 +490,7 @@ const D = (s) => `style="--d:${s}s"`;
 const rise = (txt, d, tag='span', cls='') => `<${tag} class="rise ${cls}" style="--d:${d}s">${txt}</${tag}>`;
 const chk = (d, col='#2E7567') => `<svg viewBox="0 0 24 24"><circle class="dr" pathLength="1" cx="12" cy="12" r="10.5" fill="none" stroke="${col}" stroke-width="1.8" style="--d:${d}s;--t:.6s"/><path class="dr" pathLength="1" d="M7 12.4l3.3 3.3L17.2 8.6" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="--d:${d+.35}s;--t:.4s"/></svg>`;
 
-const CHAPTERS = {1:'Opening',2:'The scope',4:'The candidate journey',5:'Technology and infrastructure',7:'Wishlist'};
+const CHAPTERS = {1:'Opening',2:'The scope',4:'The candidate journey',5:'Technology and infrastructure',6:'Wishlist'};
 const S = [];
 
 /* 1 ─ cover */
@@ -607,37 +607,6 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
     <div class="jtp a" style="--d:${(tStart+tDur+.3).toFixed(2)}s"><b>Candidate touchpoints at every stage</b>${tp.map(t=>`<span>${t}</span>`).join('')}</div>
   </section>`);
 }
-
-/* 9a ─ technology stack */
-{
-  const L = [
-    ['User interface','Candidate and admin portals','#C9962B',[['Nuxt','3.13'],['Vue','3.5'],['TypeScript',''],['Pinia',''],['Tailwind CSS','']]],
-    ['Application','Modular monolith, stateless instances','#2557DA',[['Go','1.26'],['Gin','1.10'],['nginx',''],['Scheduled jobs','in-process']]],
-    ['Data and storage','Shared state and documents','#2E7567',[['PostgreSQL','+ read replica'],['pgx',''],['Connection proxy',''],['Redis',''],['S3-compatible object storage','']]],
-    ['Platform and monitoring','Deploy, run and observe','#B76A3B',[['Docker',''],['Container orchestration',''],['Container registry',''],['Prometheus',''],['Grafana','']]],
-  ];
-  const top=17.4, bh=6.3, bg=.8; let h='';
-  L.forEach((l,i)=>{ const y=top+i*(bh+bg), d=(1.5-i*.25).toFixed(2);
-    h += `<div class="tsb a" style="top:${y}cqw;--d:${d}s;--c:${l[2]}">
-      <div class="tsn"><b>${l[0]}</b><small>${l[1]}</small></div>
-      <div class="tsc">${l[3].map(t=>`<span>${t[0]}${t[1]?` <i>${t[1]}</i>`:''}</span>`).join('')}</div></div>`; });
-  const G = [
-    ['Payments','ICICI EazyPay, BillDesk, Canara Bank, Indian Bank, PayU','Collection, verification, reconciliation'],
-    ['Identity and documents','DigiLocker; Aadhaar, PAN and driving-licence verification','Through an identity provider'],
-    ['Face liveness','FaceLive','Live-face check at each stage'],
-    ['Messaging','Transactional email and SMS','Notifications and OTP'],
-  ];
-  h += `<div class="a" style="position:absolute;left:71.2cqw;top:17.4cqw;width:21.6cqw;z-index:5;--d:1.9s"><div style="font:600 .8cqw 'IBM Plex Mono',Consolas,monospace;letter-spacing:.12em;text-transform:uppercase;color:#B76A3B">Integrations</div></div>`;
-  G.forEach((g,i)=>{ h += `<div class="tsi a l" style="top:${19.6+i*6.3}cqw;--d:${(2.1+i*.15).toFixed(2)}s"><b>${g[0]}</b><span>${g[1]}</span><small>${g[2]}</small></div>`; });
-  S.push(`<section class="slide" id="s9ts" aria-label="Technology stack">
-    <div class="kicker a" ${D(.1)}>Technology stack</div>
-    ${rise('A proven stack, <em>built for scale</em>', .2, 'h1', 'h1')}
-    <div class="a" style="position:absolute;left:7.2cqw;top:13.5cqw;width:85.6cqw;z-index:5;font-size:1.02cqw;color:#637383;--d:.5s">Candidate and admin portals on one platform, separated by routes and server-enforced permissions. Stateless instances behind a load balancer; a read replica for reporting.</div>
-    ${h}
-    <div class="outcome a" style="top:47.4cqw;font-size:1.3cqw;--d:3s">Open, portable components throughout: <em>no lock-in to a single cloud.</em></div>
-  </section>`);
-}
-
 
 /* 9b ─ end-to-end architecture */
 {
