@@ -467,6 +467,10 @@ canvas.field{position:absolute;inset:0;width:100%;height:100%;display:block;z-in
 .wpt{display:flex;align-items:baseline;justify-content:space-between;gap:.8cqw;margin-top:.6cqw}
 .wpt b{font-size:1.45cqw;font-weight:800;line-height:1.1;letter-spacing:-.01em;color:var(--c)}
 .wpt i{font:600 .7cqw "IBM Plex Mono",Consolas,monospace;font-style:normal;letter-spacing:.1em;text-transform:uppercase;color:var(--quiet)}
+.wptl{display:flex;align-items:center;gap:.6cqw}
+.wpri{font:600 .6cqw "IBM Plex Mono",Consolas,monospace;font-style:normal;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;border-radius:.3cqw;padding:.17cqw .45cqw;border:1px solid var(--accent)}
+.wpri.p1{background:var(--accent);color:#fff}
+.wpri.p2{background:#B76A3B0D;color:var(--accent)}
 .wps{margin-top:.12cqw;font-size:.84cqw;font-weight:600;color:var(--quiet)}
 .wboth{margin-top:1.8cqw}
 
@@ -932,12 +936,12 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
   };
   const AMBER = '#C9962B', BLUE = '#2557DA';
   // a platform: header label, full name, colour, number colour, classification label, groups [area, note, item numbers]
-  const AMS = { label: 'AMS', name: 'Application Management System', c: AMBER, cn: '#8E6510', cls: 'AMS', groups: [
+  const AMS = { label: 'AMS', name: 'Application Management System', c: AMBER, cn: '#8E6510', cls: 'AMS', pri: 1, groups: [
     ['Payments and communication', '', [1, 2, 3, 4]],
     ['Application setup and screening', '', [5, 6, 7]]] };
-  const BOTH = { label: `<span style="color:${AMBER}">AMS</span> + <span style="color:${BLUE}">RMS</span>`, name: 'Needed on both platforms', c: 'var(--ink)', cn: 'var(--ink)', cls: 'AMS + RMS', groups: [
+  const BOTH = { label: `<span style="color:${AMBER}">AMS</span> + <span style="color:${BLUE}">RMS</span>`, name: 'Needed on both platforms', c: 'var(--ink)', cn: 'var(--ink)', cls: 'AMS + RMS', pri: 1, groups: [
     ['', '', [8, 37]]] };
-  const RMS = { label: 'RMS', name: 'Recruitment Management System', c: BLUE, cn: BLUE, cls: 'RMS', cols: [
+  const RMS = { label: 'RMS', name: 'Recruitment Management System', c: BLUE, cn: BLUE, cls: 'RMS', pri: 2, cols: [
     [['Debar and UFM', '', [9, 10]], ['ECA interfaces and results', '', [11, 12, 13, 14]]],
     [['Medical and HMIS', '', [15, 16, 17]], ['HRMS, appointment and joining', '', [18, 19, 20]], ['Configuration and business rules', '', [21, 22, 23]]],
     [['Roles and users', 'Named users, groups and rights for each RMS module', [24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]]]] };
@@ -946,7 +950,7 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
   const count = pl => (pl.groups || pl.cols.flat()).reduce((k, g) => k + g[2].length, 0);
   const head = (pl, d0) => `<div class="wph${pl === BOTH ? ' both' : ''}" style="--c:${pl.c}">
       <div class="wpr gx" style="--d:${d0.toFixed(2)}s;--t:.7s"></div>
-      <div class="wpt a" style="--d:${(d0 + .08).toFixed(2)}s"><b>${pl.label}</b><i>${count(pl)} items</i></div>
+      <div class="wpt a" style="--d:${(d0 + .08).toFixed(2)}s"><span class="wptl"><b>${pl.label}</b><em class="wpri p${pl.pri}">Priority ${pl.pri}</em></span><i>${count(pl)} items</i></div>
       <div class="wps a" style="--d:${(d0 + .14).toFixed(2)}s">${pl.name}</div></div>`;
   let d = 0;
   const group = (pl, [area, note, nums]) => {
@@ -954,7 +958,7 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
     if (area) { h += `<div class="wgh a" style="--d:${d.toFixed(2)}s">${area}</div><div class="wgr gx" style="--d:${(d + .05).toFixed(2)}s;--t:.6s"></div>`; d += .1; }
     if (note) h += `<div class="wgn a" style="--d:${d.toFixed(2)}s">${note}</div>`;
     nums.forEach(n => { const [name, desc, why, full] = IT[n];
-      h += `<div class="wi a l" style="--d:${d.toFixed(2)}s" title="${esc(`${nn(n)} · ${full || name}\n${desc}\n${pl.cls}: ${why}`)}"><span class="wn">${nn(n)}</span><span>${name}</span></div>`;
+      h += `<div class="wi a l" style="--d:${d.toFixed(2)}s" title="${esc(`${nn(n)} · ${full || name}\n${desc}\n${pl.cls} · priority ${pl.pri}: ${why}`)}"><span class="wn">${nn(n)}</span><span>${name}</span></div>`;
       d += .04; });
     return h + '</div>';
   };
