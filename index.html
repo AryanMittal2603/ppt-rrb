@@ -620,6 +620,37 @@ canvas.field{position:absolute;inset:0;width:100%;height:100%;display:block;z-in
 .xleg{position:absolute;z-index:5}
 .xleg div{display:flex;align-items:center;gap:.45cqw;margin-top:.22cqw;font-size:.58cqw;color:#4A5867;white-space:nowrap}
 .xleg i{flex:none;width:1.25cqw;height:.62cqw;border:1.2px solid;border-radius:.15cqw}
+
+/* project organization chart */
+.ogc{position:absolute;z-index:5;box-sizing:border-box;border-radius:.6cqw;background:#FFFFFFD9;border:1px solid #14284424;overflow:hidden}
+.ogdir{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:var(--ink);border-color:var(--ink);box-shadow:0 .6cqw 1.6cqw #1428441f}
+.ogc.ogdir b{font-size:1.2cqw;font-weight:800;color:#fff}
+.ogdir span{margin-top:.15cqw;font-size:.8cqw;color:#C9D6E6}
+.ogt{display:inline-flex;align-items:center;gap:.4cqw;font:600 .64cqw "IBM Plex Mono",Consolas,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.ogt:before{content:"";flex:none;width:.6cqw;height:.6cqw;border-radius:.14cqw;background:var(--oc)}
+.ogts{display:block;margin-top:.25cqw;font-size:.7cqw;color:#637383}
+.ogp{padding:.65cqw 1cqw}
+.ogp h4{margin:0;display:flex;align-items:center;gap:.5cqw;font-size:1.05cqw;font-weight:800;color:var(--ink);line-height:1.2}
+.ogp h4:before{content:"";flex:none;width:.7cqw;height:.7cqw;border-radius:.15cqw;background:var(--oc)}
+.ogp p{margin:.2cqw 0 0;font-size:.8cqw;line-height:1.35;color:#4A5867}
+.ogc b,.ogr b{color:var(--ink);font-weight:700}
+.ogtbd{font-style:italic;color:#8A96A3}
+.ogpan{border-top:.32cqw solid var(--pc)}
+.ogph{display:flex;align-items:baseline;gap:.7cqw;height:2.7cqw;box-sizing:border-box;padding:.55cqw 1cqw 0;border-bottom:1px solid #14284414}
+.ogph b{font-size:1.3cqw;font-weight:800;color:var(--pc)}
+.ogph span{font-size:.82cqw;font-weight:600;color:#637383}
+.ogr{display:flex;box-sizing:border-box}
+.ogr+.ogr{border-top:1px solid #14284412}
+.ogr .k{flex:none;width:9.6cqw;display:flex;flex-direction:column;justify-content:center;padding:0 1cqw;background:#1428440A}
+.ogr .v{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 1cqw;font-size:.8cqw;line-height:1.4;color:#4A5867}
+.ogr .v p{margin:0}
+.ogs{display:flex;align-items:stretch}
+.ogs>div{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 1.1cqw;font-size:.82cqw;line-height:1.4;color:#4A5867}
+.ogs>div p{margin:.2cqw 0 0}
+.ogs>div+div{border-left:1px solid #14284414}
+.ogs>div.ogsk{flex:.75;background:var(--ink)}
+.ogsk b{font-size:1cqw;font-weight:800;color:#fff}
+.ogsk span{margin-top:.1cqw;font-size:.78cqw;color:#C9D6E6}
 </style>
 </head>
 <body>
@@ -649,7 +680,7 @@ const D = (s) => `style="--d:${s}s"`;
 const rise = (txt, d, tag='span', cls='') => `<${tag} class="rise ${cls}" style="--d:${d}s">${txt}</${tag}>`;
 const chk = (d, col='#2E7567') => `<svg viewBox="0 0 24 24"><circle class="dr" pathLength="1" cx="12" cy="12" r="10.5" fill="none" stroke="${col}" stroke-width="1.8" style="--d:${d}s;--t:.6s"/><path class="dr" pathLength="1" d="M7 12.4l3.3 3.3L17.2 8.6" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="--d:${d+.35}s;--t:.4s"/></svg>`;
 
-const CHAPTERS = {1:'Opening',2:'The scope',4:'The candidate journey',5:'Technology and infrastructure',6:'Security and compliance',7:'Governance and change',8:'Wishlist'};
+const CHAPTERS = {1:'Opening',2:'Project organization',3:'The scope',5:'The candidate journey',6:'Technology and infrastructure',7:'Security and compliance',8:'Governance and change',9:'Wishlist'};
 const S = [];
 
 /* 1 ─ cover */
@@ -658,9 +689,54 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
   <div class="kicker a" ${D(.2)}>Railway Recruitment Boards · AM-RMS</div>
   <h1 class="h1"><span class="rise" style="--d:.35s">From application</span><span class="rise" style="--d:.6s">to appointment,</span><span class="rise" style="--d:.85s"><em>on one track.</em></span></h1>
   <div class="promise"><div class="a" ${D(1.6)}>2.4 crore applications a year.</div><div class="a c-green" ${D(1.9)}>One platform, from first click to joining.</div></div>
-  <div class="objective a" ${D(2.4)}><b>Proposal for RRB</b> · scope, candidate journey, platforms, infrastructure, security, governance and wishlist</div>
+  <div class="objective a" ${D(2.4)}><b>Proposal for RRB</b> · organization, scope, candidate journey, platforms, infrastructure, security, governance and wishlist</div>
   <div class="foot a" ${D(2.8)}><b>Railway Recruitment Boards</b><span>·</span><span>October 2026</span></div>
 </section>`);
+
+/* 2 ─ project organization (from the RRB AMS-RMS project organization chart) */
+{
+  const OC = { RRB: '#142844', RailTel: '#2E7567', AMA: '#B76A3B', 'Data exchange': '#637383' };
+  const tag = (k, sub) => `<span class="ogt" style="--oc:${OC[k]}">${k}</span>${sub ? `<small class="ogts">${sub}</small>` : ''}`;
+  const tbd = '<span class="ogtbd">to be nominated</span>';
+  const card = (x, y, w, hh, cls, inner, dl, extra = '') => `<div class="ogc ${cls} a" style="left:${x}cqw;top:${y}cqw;width:${w}cqw;height:${hh}cqw;--d:${dl}s;${extra}">${inner}</div>`;
+  let h = '';
+  // the Director, then the three parties under the Director
+  h += card(38, 14.4, 24, 3.8, 'ogdir', '<b>B Chandra Mohiyar</b><span>Director, Indian Railways</span>', .4);
+  h += card(7.2, 20, 27.6, 6.4, '', `<div class="ogp"><h4 style="--oc:${OC.RailTel}">RailTel</h4><p>Project partner</p><p>RailTel SPOC for RRB Director: ${tbd}</p><p>AMA SPOC for RRB Director: <b>Parul Singh</b></p></div>`, .7);
+  h += card(36.2, 20, 27.6, 6.4, '', `<div class="ogp"><h4 style="--oc:${OC['Data exchange']}">Data exchange · ECA ⇄ AMA</h4><p>Nodal: <b>RRB Secunderabad</b></p></div>`, .78);
+  h += card(65.2, 20, 27.6, 6.4, '', `<div class="ogp"><h4 style="--oc:${OC.AMA}">AMA</h4><p>Chief project manager: <b>Honey Goel</b></p></div>`, .86);
+  // AMS and RMS teams, rows aligned across the two panels: RRB, RailTel, AMA
+  const ROWS = [4.4, 3.3, 4.4];
+  const panel = (x, pc, code, name, rows, dl) => card(x, 28.2, 41.4, 15.15, 'ogpan', `<div class="ogph"><b>${code}</b><span>${name}</span></div>`
+    + rows.map(([k, sub, lines], i) => `<div class="ogr" style="height:${ROWS[i]}cqw"><div class="k">${tag(k, sub)}</div><div class="v">${lines.map(t => `<p>${t}</p>`).join('')}</div></div>`).join(''), dl, `--pc:${pc}`);
+  h += panel(7.2, '#C9962B', 'AMS', 'Application Management System', [
+    ['RRB', '', [`SPOC: ${tbd}`]],
+    ['RailTel', '', ['Project manager: <b>Ankit Srivastava</b>', 'SPOC: <b>Ranjeet</b>']],
+    ['AMA', '', ['Chief project manager: <b>Honey Goel</b>', 'Project manager: <b>Nishant Singh / Rohit Chaturvedi</b>', 'Development manager: <b>Aryan Mittal / Shaswat Sinha</b>']]], 1.1);
+  h += panel(51.4, '#2557DA', 'RMS', 'Recruitment Management System', [
+    ['RRB', 'SPOCs by function', ['RMS data dashboard: <b>Sri Nivas Reddy</b>', 'RMS post master: <b>Mr. Sri Nidhi</b>', 'RMS debarment master list: <b>Abhijeet Singh</b>, Chairman, RRB Prayagraj']],
+    ['RailTel', '', ['Project manager: <b>Ankit Srivastava</b>', 'SPOC: <b>Rajnikant</b>']],
+    ['AMA', '', ['Chief project manager: <b>Honey Goel</b>', 'Project manager: <b>Rohit Chaturvedi / Nishant Singh</b>', 'Development manager: <b>Shaswat Sinha / Aryan Mittal</b>']]], 1.2);
+  // who is on site at the nodal RRB
+  h += card(7.2, 45.1, 85.6, 5.4, 'ogs', `<div class="ogsk"><b>On-site SPOCs</b><span>at RRB Secunderabad</span></div>
+    <div>${tag('RailTel')}<p>RailTel SPOCs · AMS: <b>Ranjeet</b> · RMS: <b>Rajnikant</b></p></div>
+    <div>${tag('AMA')}<p>AMA SPOC: <b>Rohit Chaturvedi</b></p></div>`, 1.6);
+  // reporting lines (1 cqw = 16 svg units)
+  const P = pts => 'M' + pts.map(q => `${(q[0] * 16).toFixed(1)} ${(q[1] * 16).toFixed(1)}`).join('L');
+  const ln = (pts, dl, arrow) => `<path class="dr" pathLength="1" d="${P(pts)}" fill="none" stroke="#637383" stroke-width="1.5" ${arrow ? 'marker-end="url(#ogm)"' : ''} style="--d:${dl}s;--t:.45s"/>`;
+  let svg = '<defs><marker id="ogm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#637383"/></marker></defs>';
+  svg += ln([[50, 18.2], [50, 19.1]], .55) + ln([[21, 19.1], [79, 19.1]], .6);
+  [21, 50, 79].forEach(x => { svg += ln([[x, 19.1], [x, 19.95]], .68, true); });
+  svg += ln([[50, 26.4], [50, 27.3]], .98) + ln([[27.9, 27.3], [72.1, 27.3]], 1.02);
+  [27.9, 72.1].forEach(x => { svg += ln([[x, 27.3], [x, 28.15]], 1.08, true); });
+  svg += ln([[27.9, 43.35], [27.9, 44.2], [72.1, 44.2], [72.1, 43.35]], 1.5) + ln([[50, 44.2], [50, 45.05]], 1.56, true);
+  S.push(`<section class="slide" id="s1org" aria-label="Project organization">
+    <div class="kicker a" ${D(.1)}>Project organization · nodal RRB Secunderabad</div>
+    ${rise('Clear roles at RRB, RailTel <em>and AMA</em>', .2, 'h1', 'h1')}
+    <svg class="over" viewBox="0 0 1600 900" style="z-index:4">${svg}</svg>
+    ${h}
+  </section>`);
+}
 
 /* 2 ─ about the tender */
 {
