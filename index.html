@@ -621,36 +621,23 @@ canvas.field{position:absolute;inset:0;width:100%;height:100%;display:block;z-in
 .xleg div{display:flex;align-items:center;gap:.45cqw;margin-top:.22cqw;font-size:.58cqw;color:#4A5867;white-space:nowrap}
 .xleg i{flex:none;width:1.25cqw;height:.62cqw;border:1.2px solid;border-radius:.15cqw}
 
-/* project organization chart */
-.ogc{position:absolute;z-index:5;box-sizing:border-box;border-radius:.6cqw;background:#FFFFFFD9;border:1px solid #14284424;overflow:hidden}
-.ogdir{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:var(--ink);border-color:var(--ink);box-shadow:0 .6cqw 1.6cqw #1428441f}
-.ogc.ogdir b{font-size:1.2cqw;font-weight:800;color:#fff}
-.ogdir span{margin-top:.15cqw;font-size:.8cqw;color:#C9D6E6}
-.ogt{display:inline-flex;align-items:center;gap:.4cqw;font:600 .64cqw "IBM Plex Mono",Consolas,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
-.ogt:before{content:"";flex:none;width:.6cqw;height:.6cqw;border-radius:.14cqw;background:var(--oc)}
-.ogts{display:block;margin-top:.25cqw;font-size:.7cqw;color:#637383}
-.ogp{padding:.65cqw 1cqw}
-.ogp h4{margin:0;display:flex;align-items:center;gap:.5cqw;font-size:1.05cqw;font-weight:800;color:var(--ink);line-height:1.2}
-.ogp h4:before{content:"";flex:none;width:.7cqw;height:.7cqw;border-radius:.15cqw;background:var(--oc)}
-.ogp p{margin:.2cqw 0 0;font-size:.8cqw;line-height:1.35;color:#4A5867}
-.ogc b,.ogr b{color:var(--ink);font-weight:700}
-.ogtbd{font-style:italic;color:#8A96A3}
-.ogpan{border-top:.32cqw solid var(--pc)}
-.ogph{display:flex;align-items:baseline;gap:.7cqw;height:2.7cqw;box-sizing:border-box;padding:.55cqw 1cqw 0;border-bottom:1px solid #14284414}
-.ogph b{font-size:1.3cqw;font-weight:800;color:var(--pc)}
-.ogph span{font-size:.82cqw;font-weight:600;color:#637383}
-.ogr{display:flex;box-sizing:border-box}
-.ogr+.ogr{border-top:1px solid #14284412}
-.ogr .k{flex:none;width:9.6cqw;display:flex;flex-direction:column;justify-content:center;padding:0 1cqw;background:#1428440A}
-.ogr .v{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 1cqw;font-size:.8cqw;line-height:1.4;color:#4A5867}
-.ogr .v p{margin:0}
-.ogs{display:flex;align-items:stretch}
-.ogs>div{flex:1;display:flex;flex-direction:column;justify-content:center;padding:0 1.1cqw;font-size:.82cqw;line-height:1.4;color:#4A5867}
-.ogs>div p{margin:.2cqw 0 0}
-.ogs>div+div{border-left:1px solid #14284414}
-.ogs>div.ogsk{flex:.75;background:var(--ink)}
-.ogsk b{font-size:1cqw;font-weight:800;color:#fff}
-.ogsk span{margin-top:.1cqw;font-size:.78cqw;color:#C9D6E6}
+/* project organization: four groups, top-down flow */
+.ofb{position:absolute;z-index:3;box-sizing:border-box;border-radius:.7cqw;background:var(--bt);border:1px solid var(--bb)}
+.ofl{position:absolute;z-index:5;box-sizing:border-box;padding-left:1.2cqw;display:flex;flex-direction:column;justify-content:center}
+.ofl i{font:600 .66cqw "IBM Plex Mono",Consolas,monospace;font-style:normal;letter-spacing:.1em;color:var(--gc)}
+.ofl b{margin-top:.12cqw;font-size:.98cqw;font-weight:800;color:var(--ink);line-height:1.2}
+.ofl span{margin-top:.12cqw;font-size:.74cqw;color:#637383}
+.ofc{position:absolute;z-index:5;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;background:#fff;border:1px solid #14284424;border-top:.28cqw solid var(--gc);border-radius:.5cqw;padding:0 1cqw;box-shadow:0 .3cqw .9cqw #1428440a}
+.ofc i{font:600 .58cqw "IBM Plex Mono",Consolas,monospace;font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:#637383;line-height:1.35}
+.ofc b{margin-top:.22cqw;font-size:1.12cqw;font-weight:800;color:var(--ink);line-height:1.2}
+.ofc>span{margin-top:.1cqw;font-size:.76cqw;color:#637383}
+.ofc.top{align-items:center;text-align:center;background:var(--ink);border-color:var(--ink)}
+.ofc.top b{margin-top:0;color:#fff}
+.ofc.top>span{color:#C9D6E6}
+.ofc.mid{align-items:center;text-align:center}
+.ofc.mid b{margin-top:0}
+.ofpm{display:flex;gap:.5cqw;margin-top:.45cqw}
+.ofpm span{flex:1;text-align:center;padding:.32cqw 0;border:1px dashed #B76A3B99;border-radius:.35cqw;font:600 .74cqw "IBM Plex Mono",Consolas,monospace;color:var(--ink);background:#B76A3B0A}
 
 /* support management */
 .spc{position:absolute;z-index:5;box-sizing:border-box;background:#FFFFFFD9;border:1px solid #14284420;border-top:.32cqw solid var(--sc);border-radius:.6cqw;padding:.8cqw 1.1cqw .6cqw}
@@ -717,47 +704,42 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
   <div class="foot a" ${D(2.8)}><b>Railway Recruitment Boards</b><span>·</span><span>October 2026</span></div>
 </section>`);
 
-/* 2 ─ project organization (from the RRB AMS-RMS project organization chart) */
+/* 2 ─ project organization: RRB Railway Board → RRB Secunderabad → RailTel → project delivery and development */
 {
-  const OC = { RRB: '#142844', RailTel: '#2E7567', AMA: '#B76A3B', 'Data exchange': '#637383' };
-  const tag = (k, sub) => `<span class="ogt" style="--oc:${OC[k]}">${k}</span>${sub ? `<small class="ogts">${sub}</small>` : ''}`;
-  const tbd = '<span class="ogtbd">to be nominated</span>';
-  const card = (x, y, w, hh, cls, inner, dl, extra = '') => `<div class="ogc ${cls} a" style="left:${x}cqw;top:${y}cqw;width:${w}cqw;height:${hh}cqw;--d:${dl}s;${extra}">${inner}</div>`;
+  const f = v => v.toFixed(2);
+  const CX = 21.6, CW = 70.2, MID = CX + CW / 2;   // the card area to the right of the group labels
+  const band = (n, name, sub, gc, tint, y, hh, dl) =>
+    `<div class="ofb a" style="left:7.2cqw;top:${f(y)}cqw;width:85.6cqw;height:${f(hh)}cqw;--bt:${tint};--bb:${gc}26;--d:${f(dl)}s"></div>`
+    + `<div class="ofl a" style="left:7.2cqw;top:${f(y)}cqw;width:14cqw;height:${f(hh)}cqw;--gc:${gc};--d:${f(dl + .05)}s"><i>${n}</i><b>${name}</b>${sub ? `<span>${sub}</span>` : ''}</div>`;
+  const card = (x, y, w, hh, cls, gc, inner, dl) => `<div class="ofc ${cls} a" style="left:${f(x)}cqw;top:${f(y)}cqw;width:${f(w)}cqw;height:${f(hh)}cqw;--gc:${gc};--d:${f(dl)}s">${inner}</div>`;
+  const INK = '#142844', GREEN = '#2E7567', RUST = '#B76A3B';
   let h = '';
-  // the Director, then the three parties under the Director
-  h += card(38, 14.4, 24, 3.8, 'ogdir', '<b>B Chandra Mohiyar</b><span>Director, Indian Railways</span>', .4);
-  h += card(7.2, 20, 27.6, 6.4, '', `<div class="ogp"><h4 style="--oc:${OC.RailTel}">RailTel</h4><p>Project partner</p><p>RailTel SPOC for RRB Director: ${tbd}</p><p>AMA SPOC for RRB Director: <b>Parul Singh</b></p></div>`, .7);
-  h += card(36.2, 20, 27.6, 6.4, '', `<div class="ogp"><h4 style="--oc:${OC['Data exchange']}">Data exchange · ECA ⇄ AMA</h4><p>Nodal: <b>RRB Secunderabad</b></p></div>`, .78);
-  h += card(65.2, 20, 27.6, 6.4, '', `<div class="ogp"><h4 style="--oc:${OC.AMA}">AMA</h4><p>Chief project manager: <b>Honey Goel</b></p></div>`, .86);
-  // AMS and RMS teams, rows aligned across the two panels: RRB, RailTel, AMA
-  const ROWS = [4.4, 3.3, 4.4];
-  const panel = (x, pc, code, name, rows, dl) => card(x, 28.2, 41.4, 15.15, 'ogpan', `<div class="ogph"><b>${code}</b><span>${name}</span></div>`
-    + rows.map(([k, sub, lines], i) => `<div class="ogr" style="height:${ROWS[i]}cqw"><div class="k">${tag(k, sub)}</div><div class="v">${lines.map(t => `<p>${t}</p>`).join('')}</div></div>`).join(''), dl, `--pc:${pc}`);
-  h += panel(7.2, '#C9962B', 'AMS', 'Application Management System', [
-    ['RRB', '', [`SPOC: ${tbd}`]],
-    ['RailTel', '', ['Project manager: <b>Ankit Srivastava</b>', 'SPOC: <b>Ranjeet</b>']],
-    ['AMA', '', ['Chief project manager: <b>Honey Goel</b>', 'Project manager: <b>Nishant Singh / Rohit Chaturvedi</b>', 'Development manager: <b>Aryan Mittal / Shaswat Sinha</b>']]], 1.1);
-  h += panel(51.4, '#2557DA', 'RMS', 'Recruitment Management System', [
-    ['RRB', 'SPOCs by function', ['RMS data dashboard: <b>Sri Nivas Reddy</b>', 'RMS post master: <b>Mr. Sri Nidhi</b>', 'RMS debarment master list: <b>Abhijeet Singh</b>, Chairman, RRB Prayagraj']],
-    ['RailTel', '', ['Project manager: <b>Ankit Srivastava</b>', 'SPOC: <b>Rajnikant</b>']],
-    ['AMA', '', ['Chief project manager: <b>Honey Goel</b>', 'Project manager: <b>Rohit Chaturvedi / Nishant Singh</b>', 'Development manager: <b>Shaswat Sinha / Aryan Mittal</b>']]], 1.2);
-  // who is on site at the nodal RRB
-  h += card(7.2, 45.1, 85.6, 5.4, 'ogs', `<div class="ogsk"><b>On-site SPOCs</b><span>at RRB Secunderabad</span></div>
-    <div>${tag('RailTel')}<p>RailTel SPOCs · AMS: <b>Ranjeet</b> · RMS: <b>Rajnikant</b></p></div>
-    <div>${tag('AMA')}<p>AMA SPOC: <b>Rohit Chaturvedi</b></p></div>`, 1.6);
-  // reporting lines (1 cqw = 16 svg units)
-  const P = pts => 'M' + pts.map(q => `${(q[0] * 16).toFixed(1)} ${(q[1] * 16).toFixed(1)}`).join('L');
-  const ln = (pts, dl, arrow) => `<path class="dr" pathLength="1" d="${P(pts)}" fill="none" stroke="#637383" stroke-width="1.5" ${arrow ? 'marker-end="url(#ogm)"' : ''} style="--d:${dl}s;--t:.45s"/>`;
-  let svg = '<defs><marker id="ogm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#637383"/></marker></defs>';
-  svg += ln([[50, 18.2], [50, 19.1]], .55) + ln([[21, 19.1], [79, 19.1]], .6);
-  [21, 50, 79].forEach(x => { svg += ln([[x, 19.1], [x, 19.95]], .68, true); });
-  svg += ln([[50, 26.4], [50, 27.3]], .98) + ln([[27.9, 27.3], [72.1, 27.3]], 1.02);
-  [27.9, 72.1].forEach(x => { svg += ln([[x, 27.3], [x, 28.15]], 1.08, true); });
-  svg += ln([[27.9, 43.35], [27.9, 44.2], [72.1, 44.2], [72.1, 43.35]], 1.5) + ln([[50, 44.2], [50, 45.05]], 1.56, true);
+  // 01 RRB Railway Board
+  h += band('01', 'RRB Railway Board', '', INK, '#1428440A', 14.4, 5.0, .35);
+  h += card(MID - 12, 15.05, 24, 3.7, 'top', INK, '<b>B Chandra Mohiyar</b><span>Director, Indian Railways</span>', .45);
+  // 02 RRB Secunderabad
+  h += band('02', 'RRB Secunderabad', 'Nodal RRB', INK, '#1428440A', 21.5, 5.0, .6);
+  h += card(MID - 12, 22.15, 24, 3.7, 'mid', INK, '<b>Sreenivas Reddy N</b><span>RRB Secunderabad</span>', .7);
+  // 03 RailTel
+  h += band('03', 'RailTel', 'Project partner', GREEN, '#2E75670D', 28.6, 7.8, .85);
+  const w4 = (CW - 3 * 1.2) / 4;
+  [['Project head · coordination', 'Anand Chandel'], ['Project technical coordination', 'Ankit Srivastava'],
+   ['Technical SPOCs', 'Bhanu and Rajnikant'], ['RailTel–RRB coordination', 'Neerav Vaghela']]
+    .forEach(([role, name], i) => { h += card(CX + i * (w4 + 1.2), 29.25, w4, 6.5, '', GREEN, `<i>${role}</i><b>${name}</b>`, .95 + i * .07); });
+  // 04 Project delivery and development
+  h += band('04', 'Project delivery and development', '', RUST, '#B76A3B0D', 38.5, 9.4, 1.3);
+  h += card(CX, 39.15, w4, 8.1, '', RUST, '<i>Project delivery</i><b>Parul Singh</b>', 1.4);
+  h += card(CX + w4 + 1.2, 39.15, w4, 8.1, '', RUST, '<i>Project development head</i><b>Honey Goel</b>', 1.47);
+  h += card(CX + 2 * (w4 + 1.2), 39.15, 2 * w4 + 1.2, 8.1, '', RUST,
+    `<i>Project development managers</i><div class="ofpm">${['PM1', 'PM2', 'PM3', 'PM4'].map(t => `<span>${t}</span>`).join('')}</div>`, 1.54);
+  // the line of coordination, top to bottom (1 cqw = 16 svg units)
+  const ln = (y1, y2, dl) => `<path class="dr" pathLength="1" d="M${(MID * 16).toFixed(1)} ${(y1 * 16).toFixed(1)}L${(MID * 16).toFixed(1)} ${(y2 * 16).toFixed(1)}" fill="none" stroke="#637383" stroke-width="1.6" marker-end="url(#ofm)" style="--d:${dl}s;--t:.35s"/>`;
+  const svg = '<defs><marker id="ofm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#637383"/></marker></defs>'
+    + ln(19.4, 21.4, .55) + ln(26.5, 28.5, .8) + ln(36.4, 38.4, 1.22);
   S.push(`<section class="slide" id="s1org" aria-label="Project organization">
     <div class="kicker a" ${D(.1)}>Project organization · nodal RRB Secunderabad</div>
-    ${rise('Clear roles at RRB, RailTel <em>and AMA</em>', .2, 'h1', 'h1')}
-    <svg class="over" viewBox="0 0 1600 900" style="z-index:4">${svg}</svg>
+    ${rise('From Railway Board to delivery, <em>one clear line</em>', .2, 'h1', 'h1')}
+    <svg class="over" viewBox="0 0 1600 900" style="z-index:6">${svg}</svg>
     ${h}
   </section>`);
 }
