@@ -651,6 +651,30 @@ canvas.field{position:absolute;inset:0;width:100%;height:100%;display:block;z-in
 .ogs>div.ogsk{flex:.75;background:var(--ink)}
 .ogsk b{font-size:1cqw;font-weight:800;color:#fff}
 .ogsk span{margin-top:.1cqw;font-size:.78cqw;color:#C9D6E6}
+
+/* support management */
+.spc{position:absolute;z-index:5;box-sizing:border-box;background:#FFFFFFD9;border:1px solid #14284420;border-top:.32cqw solid var(--sc);border-radius:.6cqw;padding:.8cqw 1.1cqw .6cqw}
+.sph{display:flex;align-items:center;justify-content:space-between;gap:.6cqw}
+.sph b{font-size:1.15cqw;font-weight:800;color:var(--ink)}
+.spbadge{font:600 .58cqw "IBM Plex Mono",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;border-radius:.3cqw;padding:.17cqw .45cqw;color:#fff;background:var(--sc)}
+.sps{margin-top:.2cqw;padding-bottom:.55cqw;border-bottom:1px solid #14284414;font-size:.76cqw;color:#637383}
+.spst{position:relative;margin-top:.4cqw}
+.spst:before{content:"";position:absolute;left:.69cqw;top:1cqw;bottom:1cqw;width:1.5px;background:#14284426}
+.spr{position:relative;display:flex;gap:.75cqw;align-items:flex-start;padding:.27cqw 0}
+.spr>i{flex:none;width:1.4cqw;height:1.4cqw;box-sizing:border-box;border-radius:50%;display:grid;place-items:center;font:600 .66cqw "IBM Plex Mono",Consolas,monospace;font-style:normal;background:var(--paper);border:1.5px solid var(--ink);color:var(--ink);z-index:1}
+.spr.ai>i{background:#C9962B;border-color:#C9962B;color:#fff}
+.spr b{display:block;font-size:.9cqw;font-weight:800;color:var(--ink);line-height:1.2}
+.spr span{display:block;margin-top:.04cqw;font-size:.76cqw;line-height:1.3;color:#637383}
+.spbar{position:absolute;z-index:5;box-sizing:border-box;display:flex;align-items:center;gap:1.4cqw;background:var(--ink);border-radius:.6cqw;padding:0 1.4cqw;box-shadow:0 .5cqw 1.4cqw #1428441f}
+.spbar b{flex:none;font-size:1.05cqw;font-weight:800;color:#fff}
+.spbar span{font-size:.8cqw;color:#C9D6E6}
+.spo{position:absolute;z-index:5;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;background:#FFFFFFD9;border:1px solid #14284420;border-left:.32cqw solid var(--sc);border-radius:.6cqw;padding:0 1.2cqw}
+.spo b{font-size:1.02cqw;font-weight:800;color:var(--ink)}
+.spo span{margin-top:.25cqw;font-size:.8cqw;line-height:1.4;color:#4A5867}
+.spal{position:absolute;z-index:6;font:600 .56cqw "IBM Plex Mono",Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:#637383;white-space:nowrap}
+.spleg{position:absolute;z-index:5;display:flex;gap:1.1cqw;font-size:.7cqw;color:#4A5867}
+.spleg span{display:flex;align-items:center;gap:.35cqw}
+.spleg i{width:.8cqw;height:.8cqw;border-radius:50%;box-sizing:border-box}
 </style>
 </head>
 <body>
@@ -680,7 +704,7 @@ const D = (s) => `style="--d:${s}s"`;
 const rise = (txt, d, tag='span', cls='') => `<${tag} class="rise ${cls}" style="--d:${d}s">${txt}</${tag}>`;
 const chk = (d, col='#2E7567') => `<svg viewBox="0 0 24 24"><circle class="dr" pathLength="1" cx="12" cy="12" r="10.5" fill="none" stroke="${col}" stroke-width="1.8" style="--d:${d}s;--t:.6s"/><path class="dr" pathLength="1" d="M7 12.4l3.3 3.3L17.2 8.6" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="--d:${d+.35}s;--t:.4s"/></svg>`;
 
-const CHAPTERS = {1:'Opening',2:'Project organization',3:'The scope',5:'The candidate journey',6:'Technology and infrastructure',7:'Security and compliance',8:'Governance and change',9:'Wishlist'};
+const CHAPTERS = {1:'Opening',2:'Project organization',3:'The scope',5:'The candidate journey',6:'Technology and infrastructure',7:'Security and compliance',8:'Governance and change',9:'Support management',10:'Wishlist'};
 const S = [];
 
 /* 1 ─ cover */
@@ -689,7 +713,7 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
   <div class="kicker a" ${D(.2)}>Railway Recruitment Boards · AM-RMS</div>
   <h1 class="h1"><span class="rise" style="--d:.35s">From application</span><span class="rise" style="--d:.6s">to appointment,</span><span class="rise" style="--d:.85s"><em>on one track.</em></span></h1>
   <div class="promise"><div class="a" ${D(1.6)}>2.4 crore applications a year.</div><div class="a c-green" ${D(1.9)}>One platform, from first click to joining.</div></div>
-  <div class="objective a" ${D(2.4)}><b>Proposal for RRB</b> · organization, scope, candidate journey, platforms, infrastructure, security, governance and wishlist</div>
+  <div class="objective a" ${D(2.4)}><b>Proposal for RRB</b> · organization, scope, candidate journey, platforms, infrastructure, security, governance, support and wishlist</div>
   <div class="foot a" ${D(2.8)}><b>Railway Recruitment Boards</b><span>·</span><span>October 2026</span></div>
 </section>`);
 
@@ -1068,7 +1092,55 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
   </section>`);
 }
 
-/* 8 ─ wishlist: what we need from RRB, by platform (41 items, numbered in reading order) */
+/* 9 ─ support management: AI first on chat and email, human agents on calls, one ticketing system */
+{
+  const GOLD = '#C9962B', INK = '#142844';
+  // channels: colour, name, badge, one line, steps [ai?, step, what happens]
+  const CH = [
+    [GOLD, 'AI chatbot', 'AI first', 'Instant replies on portal, mobile and WhatsApp', [
+      [1, 'Understands', 'The question, language and intent'],
+      [1, 'Looks up', 'The candidate’s own live record, read-only'],
+      [1, 'Answers or acts', 'Within the same AMS rules a person follows'],
+      [0, 'Hands off', 'To an agent or the RRB, with a full summary']]],
+    [GOLD, 'Email helpdesk', 'AI first', 'Every email answered within 48 hours', [
+      [0, 'Received', 'Lands in the helpdesk mailbox'],
+      [1, 'Categorized', 'AI sorts it by topic and priority'],
+      [0, 'Ticketed', 'Raised and routed to the right agent'],
+      [0, 'Answered', 'An agent replies and updates the ticket']]],
+    [INK, 'Call support', '15 human agents', 'Trained helpdesk, 6 days a week, 10:00 to 18:00', [
+      [0, 'Answered', 'By a trained human agent'],
+      [0, 'Categorized', 'Every call tagged by topic and outcome'],
+      [0, 'Resolved', 'On the call, or a ticket follows'],
+      [0, 'Insights', 'Call categories show where candidates struggle']]],
+  ];
+  const W = (85.6 - 2 * 1.6) / 3, X = i => 7.2 + i * (W + 1.6), f = v => v.toFixed(2);
+  let h = `<div class="spleg a" style="right:7.2cqw;top:12.85cqw;--d:.35s"><span><i style="background:${GOLD}"></i>AI agent</span><span><i style="border:1.5px solid ${INK};background:var(--paper)"></i>Human or system</span></div>`;
+  CH.forEach(([sc, t, badge, sub, steps], c) => { const d = .45 + c * .18;
+    h += `<div class="spc a" style="left:${f(X(c))}cqw;top:14.4cqw;width:${f(W)}cqw;height:16.6cqw;--sc:${sc};--d:${f(d)}s">
+      <div class="sph"><b>${t}</b><span class="spbadge">${badge}</span></div><div class="sps">${sub}</div>
+      <div class="spst">${steps.map(([ai, st, v], k) => `<div class="spr${ai ? ' ai' : ''} a l" style="--d:${f(d + .12 + k * .09)}s"><i>${k + 1}</i><div><b>${st}</b><span>${v}</span></div></div>`).join('')}</div></div>`; });
+  // everything that needs a person lands in one ticketing system
+  const flows = ['hand-offs', 'every email', 'follow-ups'];
+  flows.forEach((t, c) => { h += `<div class="spal a" style="left:${f(X(c) + W / 2 + .6)}cqw;top:31.55cqw;--d:${f(1.45 + c * .05)}s">${t}</div>`; });
+  h += `<div class="spbar a" style="left:7.2cqw;top:33.2cqw;width:85.6cqw;height:3.4cqw;--d:1.55s"><b>One ticketing system</b><span>Chat hand-offs, every email and call follow-ups in one queue, each with an owner, priority and status</span></div>`;
+  h += `<div class="spo a" style="left:7.2cqw;top:38.3cqw;width:41.4cqw;height:6.7cqw;--sc:#2E7567;--d:1.8s"><b>Closed and logged</b><span>The candidate gets an SMS or email update, and every conversation is logged for audit</span></div>`;
+  h += `<div class="spo a" style="left:51.4cqw;top:38.3cqw;width:41.4cqw;height:6.7cqw;--sc:${GOLD};--d:1.95s"><b>Insights</b><span>Categories from calls, chats and emails show trends; FAQs and the chatbot improve, and support status goes to RRB in governance reviews</span></div>`;
+  // arrows (1 cqw = 16 svg units)
+  const P = pts => 'M' + pts.map(q => `${(q[0] * 16).toFixed(1)} ${(q[1] * 16).toFixed(1)}`).join('L');
+  const ln = (pts, dl) => `<path class="dr" pathLength="1" d="${P(pts)}" fill="none" stroke="#637383" stroke-width="1.5" marker-end="url(#spm)" style="--d:${dl}s;--t:.4s"/>`;
+  let svg = '<defs><marker id="spm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#637383"/></marker></defs>';
+  [0, 1, 2].forEach(c => { svg += ln([[X(c) + W / 2, 31.0], [X(c) + W / 2, 33.1]], f(1.4 + c * .05)); });
+  svg += ln([[27.9, 36.6], [27.9, 38.2]], 1.72) + ln([[48.6, 41.65], [51.3, 41.65]], 1.9);
+  S.push(`<section class="slide" id="s15sup" aria-label="Support management">
+    <div class="kicker a" ${D(.1)}>Support management · candidate helpdesk</div>
+    ${rise('AI first on chat and email, <em>people on every call</em>', .2, 'h1', 'h1')}
+    <svg class="over" viewBox="0 0 1600 900" style="z-index:6">${svg}</svg>
+    ${h}
+    <div class="outcome a" ${D(2.3)}>Every query gets an answer or an owner, <em>and every conversation is logged.</em></div>
+  </section>`);
+}
+
+/* 10 ─ wishlist: what we need from RRB, by platform (41 items, numbered in reading order) */
 {
   // n: [name on slide, description, why it sits on this platform, full name if shortened on the slide]
   const IT = {
