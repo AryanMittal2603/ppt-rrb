@@ -621,6 +621,28 @@ canvas.field{position:absolute;inset:0;width:100%;height:100%;display:block;z-in
 .xleg div{display:flex;align-items:center;gap:.45cqw;margin-top:.22cqw;font-size:.58cqw;color:#4A5867;white-space:nowrap}
 .xleg i{flex:none;width:1.25cqw;height:.62cqw;border:1.2px solid;border-radius:.15cqw}
 
+/* data architecture: zones, tables, stage badges */
+.hz{position:absolute;z-index:3;border:1.4px dashed var(--zc);border-radius:.55cqw;background:var(--zb)}
+.hz>i{position:absolute;left:.55cqw;top:.32cqw;font:600 .52cqw "IBM Plex Mono",Consolas,monospace;font-style:normal;letter-spacing:.08em;text-transform:uppercase;color:var(--zc);white-space:nowrap}
+.hz.rt>i{left:auto;right:.55cqw}
+.hz>i small{margin-left:.4cqw;color:#637383;letter-spacing:.03em;text-transform:none}
+.ht{position:absolute;z-index:5;box-sizing:border-box;background:#fff;border:1px solid #14284430;border-top:.22cqw solid var(--zc);border-radius:.32cqw;padding:.26cqw .45cqw;line-height:1.18;display:flex;flex-direction:column}
+.ht b{display:flex;align-items:center;gap:.3cqw;font:600 .6cqw "IBM Plex Mono",Consolas,monospace;color:var(--ink);white-space:nowrap}
+.drl{position:absolute;z-index:7;text-align:center;line-height:1.25;font:600 .46cqw "IBM Plex Mono",Consolas,monospace;letter-spacing:.03em;color:var(--ink);background:#F3F6F4;padding:.05cqw .25cqw;border-radius:.15cqw;white-space:nowrap;transform:translate(-50%,-50%)}
+.ht span{display:block;margin-top:.08cqw;font-size:.48cqw;color:#4A5867}
+.ht.hb{background:var(--hb);border:1.4px solid var(--zc);border-top-width:.3cqw;box-shadow:0 .3cqw .9cqw #14284412}
+.ht.hb b{font-size:.78cqw}
+.ht.hb span{font-size:.52cqw}
+.ht .ky{display:flex;flex-wrap:wrap;gap:.15cqw .2cqw;margin-top:.2cqw}
+.ht .ky i{font:600 .44cqw "IBM Plex Mono",Consolas,monospace;font-style:normal;padding:.04cqw .2cqw;border-radius:.12cqw;white-space:nowrap}
+.ht .ky .pk{background:#C9962B22;color:#8E6510}.ht .ky .fk{background:#2557DA18;color:#1F49B8}.ht .ky .uq{background:#2E756718;color:#2E7567}
+.ht .sbs{display:flex;gap:.12cqw;margin-left:auto;flex:none}
+.sb{display:inline-grid;place-items:center;width:.82cqw;height:.82cqw;border-radius:50%;font:700 .44cqw "IBM Plex Mono",Consolas,monospace;font-style:normal;box-sizing:border-box}
+.sb.n{background:#2E7567;color:#fff}.sb.u{background:#C9962B;color:#fff}.sb.r{background:#fff;color:#637383;border:1px solid #63738399}
+.hco{position:absolute;z-index:5;box-sizing:border-box;border:1px solid #14284426;border-left:.28cqw solid var(--sc);border-radius:.32cqw;background:#FFFFFFCC;padding:.4cqw .55cqw;line-height:1.3}
+.hco i{display:block;font:600 .5cqw "IBM Plex Mono",Consolas,monospace;font-style:normal;letter-spacing:.06em;text-transform:uppercase;color:var(--sc)}
+.hco span{display:block;margin-top:.15cqw;font-size:.52cqw;color:var(--ink)}
+.hco span code{font:600 .5cqw "IBM Plex Mono",Consolas,monospace;color:#1F49B8}
 /* data flow: tables touched at each stage of the journey */
 .fs{position:absolute;z-index:5;box-sizing:border-box;height:3.6cqw;padding:.35cqw .5cqw 0 1.25cqw;background:var(--sc);color:#fff;line-height:1.15;
   clip-path:polygon(0 0,calc(100% - .9cqw) 0,100% 50%,calc(100% - .9cqw) 100%,0 100%,.9cqw 50%)}
@@ -1231,80 +1253,139 @@ S.push(`<section class="slide cv" id="s1" aria-label="Cover">
   </section>`);
 }
 
-/* 11 ─ data model as a flow: which tables each stage of the journey creates, updates or reads */
+/* 11 ─ data architecture along the journey: stages on top, tables by area with their links below */
 {
   const f = v => v.toFixed(2);
-  // area colours (left edge of each table chip)
-  const AC = { cand: '#C9962B', app: '#2E7567', setup: '#2557DA', staff: '#B76A3B', plat: '#637383' };
-  const AREA = { candidate: 'cand', registration_change: 'cand', candidate_flag: 'cand', liveness_check: 'cand', message: 'cand', file_owner: 'cand', access_context: 'cand',
-    scribe_registration: 'cand', application_scribe_link: 'cand', application: 'app', document: 'app', payment: 'app', payment_refund: 'app', unmatched_settlement: 'app',
-    mandate_batch: 'app', cen: 'setup', cen_config: 'setup', notice: 'setup', notice_file: 'setup', lookup: 'setup', portal_setting: 'setup', publish: 'setup',
-    publish_history: 'setup', staff_user: 'staff', mis_event: 'staff', mis_summary: 'staff', mis_report: 'staff', river_job: 'plat' };
-  const TAG = { N: ['new', 'NEW'], U: ['upd', 'UPDATE'], R: ['read', 'READ'] };
-  // stages: [actor, title, what happens, colour, [[table, N|U|R, note]]]
+  const Z = { cand: ['#C9962B', '#C9962B0C', '#FBF3E2'], app: ['#2E7567', '#2E75670A', '#E8F2EF'], setup: ['#2557DA', '#2557DA09', '#EAF0FC'], staff: ['#B76A3B', '#B76A3B0B', '#F8ECE5'] };
+  const zv = k => `--zc:${Z[k][0]};--zb:${Z[k][1]};--hb:${Z[k][2]}`;
+  // stages: [actor, title, what, colour, [[table, N|U|R]]]
   const ST = [
-    ['Staff', 'Set up the CEN', 'Configure, approve, publish', '#2557DA', [['cen', 'N', 'Notification number'], ['cen_config', 'N', 'Draft → approved → published'], ['staff_user', 'R', 'Maker and checker'],
-      ['lookup', 'R', 'Master lists'], ['notice', 'N', 'Notification, corrigenda'], ['notice_file', 'N', 'Notice PDFs'], ['publish', 'U', 'Static JSON to the portal'], ['publish_history', 'N', 'Every version kept']]],
-    ['Candidate', 'Create account', 'One-time registration (OTR)', '#C9962B', [['candidate', 'N', 'OTR no., identity, KYC'], ['liveness_check', 'N', 'Live photo verdict'], ['message', 'N', 'OTP by SMS / email'],
-      ['file_owner', 'N', 'Photo fingerprint'], ['access_context', 'N', 'Network and device'], ['lookup', 'R', 'States, categories…'], ['portal_setting', 'R', 'Portal rules']]],
-    ['Candidate', 'Login & profile', 'Sign in, update details', '#C9962B', [['candidate', 'U', 'Contact, KYC, language'], ['registration_change', 'N', 'Before / after of each edit'],
-      ['candidate_flag', 'N', 'Unusual activity, staff only'], ['message', 'N', 'OTPs and alerts']]],
-    ['Candidate', 'Fill application', 'Draft for one CEN', '#2E7567', [['cen_config', 'R', 'Published version only'], ['application', 'N', 'Draft per CEN + apply unit'], ['document', 'N', 'Photo, signature, certificates'],
-      ['file_owner', 'N', 'Same file used twice?'], ['scribe_registration', 'N', 'If a scribe is needed'], ['application_scribe_link', 'N', 'Scribe chosen']]],
-    ['Candidate', 'Submit & lock', 'Freeze the application', '#2E7567', [['application', 'U', 'Frozen + registration no.'], ['document', 'N', 'Application PDF snapshot'], ['access_context', 'N', 'Where it was submitted'],
-      ['mis_event', 'N', 'Counted for dashboards'], ['message', 'N', 'Confirmation']]],
-    ['Candidate', 'Pay the fee', 'Gateway or UPI mandate', '#2E7567', [['payment', 'N', 'Attempt → success / fail'], ['river_job', 'N', 'Reconcile and settle'], ['unmatched_settlement', 'N', 'Money with no order'],
-      ['payment_refund', 'N', 'Duplicate or mismatch'], ['mis_event', 'N', 'Counted for dashboards']]],
-    ['Candidate', 'Modify', 'Within the window', '#2E7567', [['application', 'U', 'New revision'], ['document', 'N', 'New version of a file'], ['payment', 'N', 'Modification fee'], ['mis_event', 'N', 'Counted for dashboards']]],
-    ['Staff', 'After exam & reports', 'Debits, refunds, MIS', '#B76A3B', [['mandate_batch', 'N', 'Debit / release; 2nd approver'], ['payment', 'U', 'Debited or released'], ['payment_refund', 'U', 'Refund confirmed'],
-      ['mis_summary', 'U', 'Running counts'], ['mis_report', 'N', 'Requested → approved'], ['staff_user', 'R', 'Roles and board scope']]],
+    ['Staff', 'Set up the CEN', 'Configure, approve, publish', '#2557DA', [['cen', 'N'], ['cen_config', 'N'], ['staff_user', 'R'], ['lookup', 'R'], ['notice', 'N'], ['notice_file', 'N'], ['publish', 'U'], ['publish_history', 'N']]],
+    ['Candidate', 'Create account', 'One-time registration (OTR)', '#C9962B', [['candidate', 'N'], ['liveness_check', 'N'], ['message', 'N'], ['file_owner', 'N'], ['access_context', 'N'], ['lookup', 'R'], ['portal_setting', 'R']]],
+    ['Candidate', 'Login & profile', 'Sign in, update details', '#C9962B', [['candidate', 'U'], ['registration_change', 'N'], ['candidate_flag', 'N'], ['message', 'N']]],
+    ['Candidate', 'Fill application', 'Draft for one CEN', '#2E7567', [['cen_config', 'R'], ['application', 'N'], ['document', 'N'], ['file_owner', 'N'], ['scribe_registration', 'N'], ['application_scribe_link', 'N']]],
+    ['Candidate', 'Submit & lock', 'Freeze the application', '#2E7567', [['application', 'U'], ['document', 'N'], ['access_context', 'N'], ['mis_event', 'N'], ['message', 'N']]],
+    ['Candidate', 'Pay the fee', 'Gateway or UPI mandate', '#2E7567', [['payment', 'N'], ['unmatched_settlement', 'N'], ['payment_refund', 'N'], ['mis_event', 'N']]],
+    ['Candidate', 'Modify', 'Within the window', '#2E7567', [['application', 'U'], ['document', 'N'], ['payment', 'N'], ['mis_event', 'N']]],
+    ['Staff', 'After exam & reports', 'Debits, refunds, MIS', '#B76A3B', [['mandate_batch', 'N'], ['payment', 'U'], ['payment_refund', 'U'], ['mis_summary', 'U'], ['mis_report', 'N'], ['staff_user', 'R']]],
   ];
+  // stage badges per table, derived from the stages
+  const BAD = {};
+  ST.forEach(([, , , , rows], i) => rows.forEach(([t, k]) => (BAD[t] ??= []).push([i, k])));
+  const badges = t => (BAD[t] || []).map(([i, k]) => `<i class="sb ${k === 'N' ? 'n' : k === 'U' ? 'u' : 'r'}">${i}</i>`).join('');
+  const keys = ks => ks?.length ? `<div class="ky">${ks.map(([c, t]) => `<i class="${c}">${c.toUpperCase()} ${t}</i>`).join('')}</div>` : '';
+  const POS = {};
+  const T = (z, x, y, w, hh, n, what, ks, hub, d) => { POS[n] = { x, y, w, h: hh };
+    return `<div class="ht ${hub ? 'hb' : ''} a" style="${zv(z)};left:${f(x)}cqw;top:${f(y)}cqw;width:${f(w)}cqw;height:${f(hh)}cqw;--d:${f(d)}s"><b>${n}<span class="sbs">${badges(n)}</span></b>${what ? `<span>${what}</span>` : ''}${keys(ks)}</div>`; };
+  const ZN = (z, x, y, w, hh, label, note, d, cls = '') => `<div class="hz ${cls} a" style="${zv(z)};left:${f(x)}cqw;top:${f(y)}cqw;width:${f(w)}cqw;height:${f(hh)}cqw;--d:${f(d)}s"><i>${label}<small>${note}</small></i></div>`;
+
   const X0 = 4.4, GAP = .45, CW = (91.2 - GAP * 7) / 8, cx = i => X0 + i * (CW + GAP);
   let h = '';
-  ST.forEach(([actor, title, what, col, rows], i) => {
-    const d = .35 + i * .14;
-    h += `<div class="fs ${i ? '' : 'first'} a l" style="--sc:${col};left:${f(cx(i))}cqw;top:12.3cqw;width:${f(CW + (i < 7 ? .7 : 0))}cqw;--d:${f(d)}s"><i>${i} · ${actor}</i><b>${title}</b></div>`;
-    h += `<div class="fw a" style="left:${f(cx(i) + .2)}cqw;top:16.15cqw;width:${f(CW)}cqw;--d:${f(d + .05)}s">${what}</div>`;
-    rows.forEach(([t, k, note], r) => {
-      const [cls, lab] = TAG[k];
-      h += `<div class="fc a" style="--ac:${AC[AREA[t]]};left:${f(cx(i))}cqw;top:${f(17.35 + r * 2.62)}cqw;width:${f(CW)}cqw;height:2.36cqw;--d:${f(d + .1 + r * .04)}s"><b>${t}<em class="tg-${cls}">${lab}</em></b><span>${note}</span></div>`;
-    });
+  // ── stage chevrons
+  ST.forEach(([actor, title, what, col], i) => {
+    const d = .3 + i * .1;
+    h += `<div class="fs ${i ? '' : 'first'} a l" style="--sc:${col};left:${f(cx(i))}cqw;top:11.9cqw;width:${f(CW + (i < 7 ? .7 : 0))}cqw;height:3.2cqw;--d:${f(d)}s"><i>${i} · ${actor}</i><b>${title}</b></div>`;
+    h += `<div class="fw a" style="left:${f(cx(i) + .2)}cqw;top:15.3cqw;width:${f(CW)}cqw;--d:${f(d + .05)}s">${what}</div>`;
   });
 
-  // keys carried from stage to stage: [label, colour, first stage, last stage]
-  const TH = [['cen_id + config_version · every application is tied to the exact CEN version it was filled against', '#2557DA', 0, 7],
-    ['candidate.id · owns every account record, application, document and payment', '#C9962B', 1, 7],
-    ['application (cen_id, id) · documents, scribe and payments hang off it', '#2E7567', 3, 7],
-    ['payment (cen_id, id) · refunds and post-exam debits follow it', '#B76A3B', 5, 7]];
-  const TY = 38.9;
-  h += `<div class="xlab a" style="left:4.4cqw;top:${f(TY - .1)}cqw;--d:1.6s">Keys that carry the data forward</div>`;
-  TH.forEach(([t, col, a, b], k) => {
-    const y = TY + 1.05 + k * 1.3, x1 = cx(a) + CW / 2, x2 = cx(b) + CW / 2;
-    h += `<div class="fth gx" style="background:${col};left:${f(cx(a) + .1)}cqw;top:${f(y)}cqw;width:${f(cx(b) + CW - cx(a) - .2)}cqw;--d:${f(1.7 + k * .15)}s;--t:.9s">${t}</div>`;
-    void x1; void x2;
-  });
+  const ZY = 17.1, ZB = 40.4, ZH = ZB - ZY, IN = .5, TOP = ZY + 1.35;
+  // ── recruitment setup (under stage 0)
+  { const x = cx(0), w = CW; h += ZN('setup', x, ZY, w, ZH, 'Recruitment setup', '8 tables', .9);
+    const L = [['cen', 'One per notification', [['pk', 'id']], 1], ['cen_config', 'Fees, dates, fields, rules', [['pk', 'cen_id + version']], 1],
+      ['notice', 'Public notices, 2nd admin approves'], ['notice_file', 'Every PDF ever attached'], ['lookup', 'All master lists'], ['portal_setting', 'Draft + approved settings'],
+      ['publish', 'Static JSON served to portal'], ['publish_history', 'Every version kept']];
+    const sh = (ZB - .45 - TOP - 7 * .3 - 2 * 3.05) / 6; let y = TOP; L.forEach(([n, wh, ks, hub], k) => { const hh = hub ? 3.05 : sh; h += T('setup', x + IN + .55, y, w - IN * 2 - .55, hh, n, wh, ks, hub, 1.0 + k * .04); y += hh + .3; }); }
+  // ── candidates and identity (under stages 1–2)
+  { const x = cx(1), w = cx(2) + CW - cx(1); h += ZN('cand', x, ZY, w, ZH, 'Candidates &amp; identity', '9 tables · every row → candidate.id', .95);
+    h += T('cand', x + IN, TOP, w - IN * 2, 3.5, 'candidate', 'One row per registered candidate: OTR number, identity, KYC result', [['pk', 'id'], ['uq', 'otr_no'], ['uq', 'mobile'], ['uq', 'email']], 1, 1.1);
+    const c2 = (w - IN * 2 - 1.3) / 2, L = [['registration_change', 'Before / after of each edit'], ['candidate_flag', 'Unusual activity, staff only'], ['liveness_check', 'Live photo verdict and scores'],
+      ['message', 'OTP / SMS / email log, no body'], ['access_context', 'Network and device'], ['file_owner', 'First owner of each file hash'], ['scribe_registration', 'Scribe profile, frozen on submit'], ['application_scribe_link', 'Scribe chosen per application']];
+    const y0 = TOP + 4.35, rh = (ZB - .45 - y0 - 3 * .38) / 4;
+    L.forEach(([n, wh], k) => { h += T('cand', x + IN + (k % 2) * (c2 + 1.3), y0 + Math.floor(k / 2) * (rh + .38), c2, rh, n, wh, null, 0, 1.15 + k * .04); }); }
+  // ── applications and payments (under stages 3–6)
+  { const x = cx(3), w = cx(6) + CW - cx(3); h += ZN('app', x, ZY, w, ZH, 'Applications &amp; payments', '6 tables · partitioned by CEN', 1.0, 'rt');
+    const cw4 = (w - IN * 2 - 3 * 1.2) / 4, col = k => x + IN + k * (cw4 + 1.2), r1 = TOP, r1h = 7.2;
+    h += T('app', col(0), r1, cw4, r1h, 'application', 'One per candidate, CEN and apply unit; draft → frozen; revisions', [['pk', 'cen_id + id'], ['fk', 'candidate_id'], ['fk', 'config_version']], 1, 1.25);
+    h += T('app', col(1), r1, cw4, r1h, 'document', 'Photo, signature, certificates, PDF snapshot; re-upload = new version', [['fk', 'application_id']], 0, 1.3);
+    h += T('app', col(2), r1, cw4, r1h, 'payment', 'Gateway or UPI mandate; application or modification fee', [['pk', 'cen_id + id'], ['fk', 'application_id'], ['uq', 'merchant_order_id']], 1, 1.35);
+    h += T('app', col(3), r1, cw4, r1h, 'payment_refund', 'Duplicate debits, mismatches → refund confirmed', [['fk', 'payment_id']], 0, 1.4);
+    const r2 = r1 + r1h + 2.4, r2h = ZB - .45 - r2;
+    h += `<div class="hco a" style="--sc:#2E7567;left:${f(col(0))}cqw;top:${f(r2)}cqw;width:${f(cw4 * 2 + 1.2)}cqw;height:${f(r2h)}cqw;--d:1.5s">
+      <i>4 · Submit &amp; lock</i><span><code>application</code> frozen with its registration number; the PDF snapshot is stored in <code>document</code>; <code>mis_event</code> counts it for dashboards.</span>
+      <i style="margin-top:.45cqw">6 · Modify</i><span>Changes are staged, then committed as a new revision of <code>application</code>; new <code>document</code> versions; the modification fee is a new <code>payment</code>.</span></div>`;
+    h += T('app', col(2), r2, cw4, r2h, 'unmatched_settlement', 'Money settled with no order → driven to refund', [['fk', 'candidate_id']], 0, 1.55);
+    h += T('app', col(3), r2, cw4, r2h, 'mandate_batch', 'Post-exam UPI debits and releases; planned, then approved', [['fk', 'cen_id'], ['fk', 'approved_by']], 0, 1.6); }
+  // ── staff and reporting (under stage 7)
+  { const x = cx(7), w = CW; h += ZN('staff', x, ZY, w, ZH, 'Staff &amp; reporting', '4 tables', 1.05);
+    const L = [['staff_user', 'Roles, board scope, MFA', [['pk', 'id']], 1], ['mis_event', 'Change log for dashboards', [['fk', 'cen_id']]], ['mis_summary', 'Running counts by day, board, category', [['fk', 'cen_id']]], ['mis_report', 'Requested → approved → expires in 90 days', [['fk', 'cen_id']]]];
+    const hh = (ZB - .45 - TOP - 3 * .35) / 4;
+    L.forEach(([n, wh, ks, hub], k) => { h += T('staff', x + IN + .55, TOP + k * (hh + .35), w - IN * 2 - .55, hh, n, wh, ks, hub, 1.2 + k * .05); }); }
 
-  // always-on platform tables
-  const BY = 45.3;
-  h += `<div class="fbd a" style="left:4.4cqw;top:${f(BY)}cqw;width:91.2cqw;height:4.1cqw;--d:2.6s"><i>Behind every stage</i></div>`;
+  // ── connectors: many → one (1 cqw = 16 svg units)
+  const P = pts => 'M' + pts.map(q => `${(q[0] * 16).toFixed(1)} ${(q[1] * 16).toFixed(1)}`).join('L');
+  const R = n => POS[n], mid = n => R(n).y + R(n).h / 2;
+  let svg = `<defs><marker id="hk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#142844"/></marker>
+    <marker id="hkb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2557DA"/></marker></defs>`;
+  let fid = 0;
+  const E = (pts, d, opt = {}) => { const id = `hp${fid++}`;
+    svg += `<path id="${id}" class="dr" pathLength="1" d="${P(pts)}" fill="none" stroke="${opt.c || '#142844'}" stroke-width="${opt.w || 1.4}" ${opt.dash ? 'stroke-dasharray="4 3"' : ''} marker-end="url(#${opt.c ? 'hkb' : 'hk'})" style="--d:${f(d)}s;--t:${opt.t || .6}s"/>`;
+    if (opt.dot) svg += `<circle r="3" fill="${opt.dot}" opacity="0"><animateMotion dur="${opt.dur || 2.4}s" repeatCount="indefinite" begin="indefinite" keyPoints="1;0" keyTimes="0;1" calcMode="linear" data-at="${f(d + 1)}"><mpath href="#${id}"/></animateMotion><set attributeName="opacity" to="1" begin="indefinite" data-at="${f(d + 1)}"/></circle>`; };
+  const lab = (x, y, t, d) => { h += `<div class="drl a" style="left:${f(x)}cqw;top:${f(y)}cqw;--d:${f(d)}s">${t}</div>`; };
+  // setup: everything hangs off cen (spine on the left)
+  { const sx = R('cen').x - .3; ['cen_config', 'notice', 'publish'].forEach((n, k) => E([[R(n).x, mid(n)], [sx, mid(n)], [sx, mid('cen')], [R('cen').x, mid('cen')]], 1.6 + k * .05, { w: 1.1 }));
+    const sx2 = R('notice').x - .3 + .15; void sx2; }
+  // candidate: child tables → candidate through a bus between the two columns
+  { const c = R('candidate'), bx = R('registration_change').x + R('registration_change').w + .65;
+    E([[bx, R('application_scribe_link').y + R('application_scribe_link').h / 2], [bx, c.y + c.h]], 1.7, { w: 1.6, t: .8 });
+    ['registration_change', 'liveness_check', 'access_context', 'scribe_registration'].forEach(n => { svg += `<path class="dr" pathLength="1" d="${P([[R(n).x + R(n).w, mid(n)], [bx, mid(n)]])}" fill="none" stroke="#142844" stroke-width="1.1" style="--d:1.8s;--t:.3s"/>`; });
+    ['candidate_flag', 'message', 'file_owner', 'application_scribe_link'].forEach(n => { svg += `<path class="dr" pathLength="1" d="${P([[R(n).x, mid(n)], [bx, mid(n)]])}" fill="none" stroke="#142844" stroke-width="1.1" style="--d:1.8s;--t:.3s"/>`; });
+    lab(bx, c.y + c.h + .45, 'candidate_id', 2.0); }
+  // application → candidate (crosses into the candidate area)
+  { const a = R('application'), c = R('candidate'); const y = c.y + c.h / 2;
+    E([[a.x, a.y + 1.4], [a.x - .55, a.y + 1.4], [a.x - .55, y], [c.x + c.w, y]], 1.9, { w: 1.8, dot: '#C9962B' }); }
+  // application → cen_config (the exact CEN version), routed above the areas
+  { const a = R('application'), cc = R('cen_config'), yT = 16.75, xa = a.x + a.w * .5;
+    const gx = cx(1) - GAP / 2;
+    E([[xa, a.y], [xa, yT], [gx, yT], [gx, cc.y + cc.h / 2], [cc.x + cc.w, cc.y + cc.h / 2]], 2.0, { c: '#2557DA', w: 1.8, t: 1, dot: '#2557DA', dur: 3.2 });
+    lab((xa + gx) / 2, yT, 'application → cen_config (cen_id + config_version)', 2.3); }
+  // document → application, payment → application, refund → payment
+  { const a = R('application'), dc = R('document'), p = R('payment'), r = R('payment_refund'), yL = a.y + a.h + 1.2;
+    E([[dc.x, dc.y + 2], [a.x + a.w, dc.y + 2]], 2.2, { dot: '#2E7567' });
+    E([[p.x + p.w * .5, p.y + p.h], [p.x + p.w * .5, yL], [a.x + a.w * .5, yL], [a.x + a.w * .5, a.y + a.h]], 2.3, { w: 1.6, dot: '#2E7567', dur: 2.8 });
+    lab((p.x + a.x + a.w) / 2 + 1.5, yL, 'application_id', 2.5);
+    E([[r.x, r.y + 2], [p.x + p.w, r.y + 2]], 2.4, { dot: '#2E7567' });
+    const u = R('unmatched_settlement'), m = R('mandate_batch');
+    E([[m.x + m.w * .5, m.y], [m.x + m.w * .5, r.y + r.h]], 2.5, { dash: 1 }); lab(m.x + m.w * .5, m.y - .6, 'releases → refunds', 2.6);
+    E([[u.x + u.w * .5, u.y], [u.x + u.w * .5, p.y + p.h]], 2.5, { dash: 1 }); lab(u.x + u.w * .5, u.y - .6, 'no matching payment', 2.6); }
+  // staff: mis_* → cen; mandate_batch → staff approval
+  { const s0 = R('staff_user'), m = R('mandate_batch');
+    E([[s0.x, mid('staff_user')], [m.x + m.w + .6, mid('staff_user')], [m.x + m.w + .6, m.y + m.h * .5], [m.x + m.w, m.y + m.h * .5]], 2.6, { dash: 1, w: 1.1 }); }
+
+  // ── keys that carry the data forward
+  const TH = [['cen_id + config_version · every application is tied to the exact CEN version it was filled against', '#2557DA', 0], ['candidate.id · owns every account record, application, document and payment', '#C9962B', 1],
+    ['application (cen_id, id) · documents, scribe and payments hang off it', '#2E7567', 3], ['payment (cen_id, id) · refunds and post-exam debits follow it', '#B76A3B', 5]];
+  const TY = 41.0;
+  TH.forEach(([t, col, a], k) => { h += `<div class="fth gx" style="background:${col};left:${f(cx(a) + .1)}cqw;top:${f(TY + k * 1.2)}cqw;width:${f(cx(7) + CW - cx(a) - .2)}cqw;height:.95cqw;--d:${f(2.7 + k * .12)}s;--t:.9s">${t}</div>`; });
+
+  // ── behind every stage
+  const BY = 46.2, bw = (91.2 - 1.2 - 5 * .4) / 6;
+  h += `<div class="fbd a" style="left:4.4cqw;top:${f(BY)}cqw;width:91.2cqw;height:3.85cqw;--d:3s"><i>Behind every stage</i></div>`;
   [['audit_event', 'Every write and staff read, hash-chained'], ['request_key', 'A retried click never pays or submits twice'], ['river_job', 'Background work, queued in the same transaction'],
    ['river_queue · leader · notification', 'Job queues across servers'], ['feedback', 'Anonymous portal feedback'], ['goose_db_version', 'Database change history']]
-    .forEach(([t, note], i) => { const w = (91.2 - 1.2 - 5 * .4) / 6;
-      h += `<div class="fc a" style="--ac:#637383;left:${f(5 + i * (w + .4))}cqw;top:${f(BY + 1.3)}cqw;width:${f(w)}cqw;height:2.3cqw;--d:${f(2.65 + i * .04)}s"><b>${t}</b><span>${note}</span></div>`; });
+    .forEach(([t, note], i) => { h += `<div class="fc a" style="--ac:#637383;left:${f(5 + i * (bw + .4))}cqw;top:${f(BY + 1.25)}cqw;width:${f(bw)}cqw;height:2.2cqw;--d:${f(3.05 + i * .04)}s"><b>${t}</b><span>${note}</span></div>`; });
 
-  // legend
-  const LY = 50.4;
-  h += `<div class="xleg a" style="left:4.4cqw;top:${f(LY)}cqw;--d:2.9s;display:flex;gap:1.6cqw">
-    <div><em class="tg-new mono" style="font-style:normal;font-size:.42cqw;padding:.04cqw .2cqw;border-radius:.12cqw">NEW</em>row created</div>
-    <div><em class="tg-upd mono" style="font-style:normal;font-size:.42cqw;padding:.04cqw .2cqw;border-radius:.12cqw">UPDATE</em>row changed</div>
-    <div><em class="tg-read mono" style="font-style:normal;font-size:.42cqw;padding:.04cqw .2cqw;border-radius:.12cqw">READ</em>looked up only</div>
-    ${[['cand', 'Candidates & identity'], ['app', 'Applications & payments'], ['setup', 'Recruitment setup'], ['staff', 'Staff & reporting'], ['plat', 'Platform']]
-      .map(([k, t]) => `<div><i style="width:.3cqw;height:.9cqw;background:${AC[k]};border-color:${AC[k]}"></i>${t}</div>`).join('')}
+  // ── legend
+  h += `<div class="xleg a" style="left:4.4cqw;top:50.75cqw;--d:3.2s;display:flex;gap:1.3cqw;align-items:center">
+    <div><i class="sb n" style="border:0">3</i>created at stage 3</div><div><i class="sb u" style="border:0">4</i>updated at stage 4</div><div><i class="sb r" style="width:.82cqw;height:.82cqw">0</i>read at stage 0</div>
+    <div><svg width="26" height="8" viewBox="0 0 26 8"><path d="M1 4H22" stroke="#142844" stroke-width="1.4"/><path d="M19 1L24 4L19 7" fill="none" stroke="#142844" stroke-width="1.4"/></svg>many → one (foreign key)</div>
+    <div><svg width="26" height="8" viewBox="0 0 26 8"><path d="M1 4H22" stroke="#142844" stroke-width="1.4" stroke-dasharray="4 3"/></svg>process link</div>
+    <div><i style="background:#FBF3E2;border-color:#C9962B;border-width:1.4px"></i>central table</div>
     <div style="margin-left:auto">36 tables · 43 foreign keys · history tables are append-only</div></div>`;
 
   S.push(`<section class="slide" id="s17dm" aria-label="Data model">
-    <div class="kicker a" ${D(.1)}>RRB AMS · how data flows through the database</div>
-    <h1 class="h1 rise" style="--d:.2s;font-size:2.3cqw;top:8.5cqw">From CEN set-up to fee and reports: <em>which tables each step touches</em></h1>
+    <div class="kicker a" ${D(.1)}>RRB AMS · data architecture along the candidate journey</div>
+    <h1 class="h1 rise" style="--d:.2s;font-size:2.3cqw;top:8.3cqw">Every step writes to its own tables, <em>all tied to candidate, CEN and application</em></h1>
+    <svg class="over" viewBox="0 0 1600 900" style="z-index:6">${svg}</svg>
     ${h}
   </section>`);
 }
